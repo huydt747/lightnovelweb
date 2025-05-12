@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Danh sách truyện</h2>
+  <div class="row">
+    {% for novel in novels %}
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <img src="{{ novel.cover.url }}" class="card-img-top" alt="{{ novel.title }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ novel.title }}</h5>
+          <p class="card-text">{{ novel.description|truncatewords:20 }}</p>
+          <a href="{% url 'novel_detail' novel.id %}" class="btn btn-primary">Xem chi tiết</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

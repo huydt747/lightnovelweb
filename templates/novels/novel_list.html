@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Trang chủ{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Danh sách Light Novels</h1>
+<div class="row">
+    {% for novel in novels %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="{{ novel.cover_image.url }}" class="card-img-top" alt="{{ novel.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ novel.title }}</h5>
+                    <p class="card-text">{{ novel.description|truncatewords:20 }}</p>
+                    <a href="{% url 'novels:novel_detail' novel.id %}" class="btn btn-primary">Đọc ngay</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p>Chưa có truyện nào.</p>
+    {% endfor %}
+</div>
+{% endblock %}

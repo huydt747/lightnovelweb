@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'novels:novel_list' %}">📘 LightNovel</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'novels:novel_list' %}">Truyện</a></li>
+                {% comment %} {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'users:profile' %}">Chào, {{ user.username }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Đăng xuất</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Đăng nhập</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Đăng ký</a></li>
+                {% endif %} {% endcomment %}
+            </ul>
+        </div>
+    </div>
+</nav>
