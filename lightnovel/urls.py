@@ -3,9 +3,12 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from novels import views as novel_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('novels.urls')),  # Trang chủ hiển thị danh sách truyện
+    path('', novel_views.novel_list, name='home'),  # Trang chủ là danh sách truyện
+    path('novels/', include('novels.urls')),
     # path('users/', include('users.urls')),
     # path('comments/', include('comments.urls')),
 ]
