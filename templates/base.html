@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <title>{% block title %}LightNovel{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    {% load livereload_tags %}
     {% comment %} <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endcomment %}
 </head>
 <body class="bg-gray-50 text-gray-800">
-
+    
     <!-- Header -->
     {% include "partials/header.html" %}
 
     
 
     <!-- Main Content -->
-    <main class="container mx-auto px-4 py-6">
+    <main class="container mx-auto px-4 py-4">
         {% block content %}{% endblock %}
     </main>
 
     <!-- Footer -->
     {% include "partials/footer.html" %}
-
 </body>
 </html>

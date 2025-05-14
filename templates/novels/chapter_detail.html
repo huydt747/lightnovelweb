@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="chapter-detail p-6">
+  <div class="mb-4">
+    <a href="{% url 'novels:novel_detail' novel.id %}" class="text-blue-500 hover:underline">&larr; Quay lại {{ novel.title }}</a>
+  </div>
+
+  <h1 class="text-3xl font-bold mb-2">Chương {{ chapter.chapter_number }}: {{ chapter.title }}</h1>
+  <p class="text-sm text-gray-500 mb-4">Cập nhật: {{ chapter.created_at|date:"d/m/Y H:i" }}</p>
+
+  <div class="content prose max-w-full">
+    {{ chapter.content|linebreaks }}
+  </div>
+</div>
+{% endblock %}
