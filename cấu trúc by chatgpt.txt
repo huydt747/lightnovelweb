@@ -37,6 +37,9 @@ lightnovel_project/
 	partials/
 	├── footer.html
 	├── header.html
+	users/
+	├── auth.html
+	├── profile.html
 
 ├── static/                        ← CSS, JS, hình ảnh
 │   ├── css/

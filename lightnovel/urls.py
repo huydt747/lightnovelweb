@@ -9,7 +9,7 @@ urlpatterns = [
     path('admin', admin.site.urls),
     path('', novel_views.novel_list, name='home'),
     path('novels/', include('novels.urls')),
-    # path('users/', include('users.urls')),
+    path('users/', include(('users.urls', 'users'), namespace='users')),
     # path('comments/', include('comments.urls')),
 ]
 

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded shadow">
+  <h2 class="text-2xl font-bold mb-4">
+    {% if type == 'register' %}Đăng ký{% else %}Đăng nhập{% endif %}
+  </h2>
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="mb-4">
+        <label class="block text-gray-700">{{ field.label_tag }}</label>
+        {{ field }}
+        {% if field.errors %}
+          <p class="text-red-500 text-sm">{{ field.errors.0 }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+    <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded">
+      {% if type == 'register' %}Tạo tài khoản{% else %}Đăng nhập{% endif %}
+    </button>
+  </form>
+</div>
+{% endblock %}
