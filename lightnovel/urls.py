@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 from novels import views as novel_views
 
 urlpatterns = [
-    path('admin', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', novel_views.novel_list, name='home'),
     path('novels/', include('novels.urls')),
     path('users/', include(('users.urls', 'users'), namespace='users')),
