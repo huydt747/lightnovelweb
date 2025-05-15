@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Novel, Chapter
 from comments.models import Comment
 from comments.forms import CommentForm
@@ -10,6 +11,11 @@ def novel_list(request):
 def novel_detail(request, novel_id):
     novel = get_object_or_404(Novel, pk=novel_id)
     comments = novel.comments.filter(parent__isnull=True).select_related('user').prefetch_related('replies')
+
+    # Lấy danh sách ID truyện đã lưu (nếu người dùng đã đăng nhập)
+    saved_novel_ids = []
+    if request.user.is_authenticated:
+        saved_novel_ids = list(request.user.saved_novels.values_list('novel_id', flat=True))
 
     if request.method == 'POST':
         if request.user.is_authenticated:
@@ -28,7 +34,8 @@ def novel_detail(request, novel_id):
     return render(request, 'novels/novel_detail.html', {
         'novel': novel,
         'comments': comments,
-        'form': form
+        'form': form,
+        'saved_novel_ids': saved_novel_ids,
     })
 
 def chapter_detail(request, novel_id, chapter_id):

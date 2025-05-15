@@ -20,10 +20,6 @@
 
         <!-- Menu Items -->
         <div class="flex items-center gap-4">
-            <ul :class="open ? 'block' : 'hidden'" class="lg:flex lg:items-center lg:space-x-6 space-y-2 lg:space-y-0 mt-4 lg:mt-0 text-sm font-medium">
-                <li><a href="{% url 'novels:novel_list' %}" class="hover:text-blue-400">Truyện</a></li>
-            </ul>
-
             <!-- Avatar & Dropdown -->
             <div class="relative" x-data="{ userMenu: false }">
                 <button @click="userMenu = !userMenu" class="focus:outline-none">
