@@ -27,7 +27,7 @@ lightnovel_project/
 
 
 ├── templates/                     ← Template chung
-│   └── base.html
+│   └── index.html
 	novels/
 	├── novel_list.html
 	├── novel_detail.html

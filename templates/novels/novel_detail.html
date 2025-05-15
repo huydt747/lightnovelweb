@@ -1,6 +1,6 @@
-{% extends 'base.html' %}
+{% extends 'index.html' %}
 {% block content %}
-<div class="novel-detail p-5 flex flex-row gap-4 rounded-lg">
+<div class="novel-detail mb-5 flex flex-row gap-4 rounded-lg">
     <div class="image w-1/4 bg-blue-200 rounded-lg overflow-hidden">
       <img class="w-full h-auto object-cover" src="{{ novel.cover_image.url }}" alt="Ảnh bìa {{ novel.title }}">
     </div>
@@ -36,9 +36,9 @@
           </div>
           {% if user.is_authenticated %}
             {% if novel.id in saved_novel_ids %}
-              <a href="{% url 'users:toggle_save_novel' novel.id %}" class="text-sm text-red-600">★ Đã lưu</a>
+              <a href="{% url 'users:toggle_save_novel' novel.id %}" class="text-sm text-red-600">Đã lưu</a>
             {% else %}
-              <a href="{% url 'users:toggle_save_novel' novel.id %}" class="text-sm text-gray-600">☆ Lưu truyện</a>
+              <a href="{% url 'users:toggle_save_novel' novel.id %}" class="text-sm text-gray-600">Lưu truyện</a>
             {% endif %}
           {% endif %}
 
@@ -46,7 +46,7 @@
     </div>
 </div>
 
-<div class="chapters bg-white p-5 rounded-lg">
+<div class="chapters bg-white p-4 rounded-lg">
   <h2 class="text-2xl font-bold mb-4">Danh sách chương</h2>
   <div class="chapter-list divide-y divide-gray-200">
     {% for chapter in novel.chapters.all %}
