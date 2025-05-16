@@ -11,52 +11,95 @@
 
     <!-- Tabs tiêu đề -->
     <div class="flex justify-between items-start mb-6 flex-wrap">
-        <!-- Tabs bên trái -->
-        <div>
-            <ul class="flex space-x-4 text-sm font-semibold">
-                <li><a href="#" class="bg-yellow-500 text-white px-3 py-1 rounded shadow">🏆 Nổi bật</a></li>
-                <li><a href="#" class="text-gray-600 hover:text-black">Top tháng</a></li>
-                <li><a href="#" class="text-gray-600 hover:text-black">Toàn t/gian</a></li>
-            </ul>
 
             <!-- Slider truyện nổi bật -->
-            <div class="flex space-x-4 mt-4 overflow-x-auto scrollbar-hide">
-                {% for featured in featured_novels %}
-                    <div class="w-40 flex-shrink-0 relative">
-                        <a href="{% url 'novels:novel_detail' featured.id %}">
-                            <img src="{{ featured.cover_image.url }}" alt="{{ featured.title }}"
-                                 class="rounded-md h-56 w-full object-cover shadow">
-                            <p class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 text-white text-sm font-semibold p-1 truncate">
-                                {{ featured.title }}
-                            </p>
-                        </a>
+    <div class="flex-1">
+        <ul class="flex space-x-4 text-sm font-semibold">
+            <li><a href="#" class="bg-yellow-500 text-white px-3 py-1 rounded shadow">🏆 Nổi bật</a></li>
+            <li><a href="#" class="text-gray-600 hover:text-black">Top tháng</a></li>
+            <li><a href="#" class="text-gray-600 hover:text-black">Toàn t/gian</a></li>
+        </ul>
+
+        <!-- Slider sử dụng cùng dữ liệu novels -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-4">
+            {% for novel in novels|slice:":6" %}
+            <div class="bg-white rounded-md shadow hover:shadow-lg transition overflow-hidden group">
+                <a href="{% url 'novels:novel_detail' novel.id %}">
+                    <div class="relative">
+                        <img src="{{ novel.cover_image.url }}" alt="{{ novel.title }}"
+                             class="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                        {% if novel.is_hot %}
+                            <span class="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded shadow">HOT</span>
+                        {% endif %}
                     </div>
-                {% endfor %}
+                </a>
+                <div class="p-2">
+                    <a href="{% url 'novels:novel_detail' novel.id %}" class="font-semibold text-sm text-gray-800 line-clamp-2 hover:text-blue-600">
+                        {{ novel.title }}
+                    </a>
+                    <div class="mt-1 space-y-0.5 text-xs text-gray-600">
+                        {% for chapter in novel.latest_chapters.all %}
+                            <div class="flex justify-between">
+                                <a href="{% url 'novels:chapter_detail' novel.id chapter.id %}" class="hover:text-blue-500">
+                                    Ch. {{ chapter.number }}
+                                </a>
+                                <span class="text-gray-400 whitespace-nowrap">{{ chapter.updated_at|timesince }} trước</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
+            {% endfor %}
         </div>
+    </div>
 
         <!-- Bảng thảo luận -->
         <div class="w-full sm:w-auto mt-6 sm:mt-0 sm:ml-6">
             <div class="bg-white shadow-md rounded-md p-4 w-72">
-                <div class="flex space-x-2 font-semibold mb-3 text-sm">
-                    <span class="bg-gray-800 text-white px-2 py-1 rounded">Thảo Luận</span>
-
+                <div class="flex items-center justify-between mb-3">
+                    <span class="font-semibold text-sm bg-gray-800 text-white px-2 py-1 rounded">Bình Luận Mới</span>
+                    <span class="text-xs text-gray-500">{{ recent_comments.count }} bình luận</span>
                 </div>
-                <ul class="text-sm space-y-2">
-                    {% for thread in recent_threads %}
-                        <li class="flex justify-between items-center">
-                            <div class="flex items-center space-x-2">
-                                <span class="w-2.5 h-2.5 rounded-full {% if thread.status == 'hot' %}bg-pink-500{% elif thread.status == 'info' %}bg-cyan-400{% else %}bg-green-500{% endif %}"></span>
-                                <a href="{{ thread.url }}" class="truncate hover:underline text-gray-800">
-                                    {{ thread.title|truncatechars:35 }}
+                
+                <ul class="text-sm space-y-3">
+                    {% for comment in recent_comments %}
+                    <li class="group">
+                        <div class="flex items-start space-x-2">
+                            <!-- Avatar -->
+                            <div class="flex-shrink-0">
+                                <img src="{{ comment.user.profile.avatar.url|default:'/static/images/default-avatar.png' }}" 
+                                     class="w-6 h-6 rounded-full object-cover border border-gray-200"
+                                     alt="{{ comment.user.username }}">
+                            </div>
+                            
+                            <!-- Nội dung -->
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center">
+                                    <a href="#" class="font-medium text-gray-800 hover:underline truncate">
+                                        {{ comment.user.username }}
+                                    </a>
+                                    <span class="ml-2 text-xs text-gray-500">{{ comment.created_at|timesince }} trước</span>
+                                </div>
+                                <a href="#comment-{{ comment.id }}" class="block text-gray-600 hover:text-gray-800 mt-1 line-clamp-2">
+                                    {{ comment.content }}
                                 </a>
                             </div>
-                            <span class="text-xs text-gray-500 whitespace-nowrap">
-                                {{ thread.time }}
-                            </span>
-                        </li>
+                        </div>
+                    </li>
+                    {% empty %}
+                    <li class="text-center py-2 text-gray-500 text-sm">
+                        Chưa có bình luận nào
+                    </li>
                     {% endfor %}
                 </ul>
+                
+                {% if recent_comments.count > 3 %}
+                <div class="mt-3 text-center">
+                    <a href="#comment-section" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                        Xem tất cả bình luận →
+                    </a>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -97,6 +140,11 @@
                 </div>
             </div>
         {% endfor %}
+    </div>
+
+    <!-- Phần bình luận chính -->
+    <div id="comment-section" class="mt-8">
+        <!-- Thêm phần bình luận chính ở đây nếu cần -->
     </div>
 
 </div>
