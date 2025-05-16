@@ -1,15 +1,66 @@
 {% extends 'index.html' %}
 {% block content %}
-<div class="chapter-detail p-6">
-  <div class="mb-4">
-    <a href="{% url 'novels:novel_detail' novel.id %}" class="text-blue-500 hover:underline">&larr; Quay lại {{ novel.title }}</a>
-  </div>
-
+<style>
+  .sticky-nav {
+    position: sticky;
+    bottom: 20px;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    border-radius: 9999px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 50;
+  }
+  .sticky-nav.hidden {
+    transform: translateY(120%);
+    opacity: 0;
+  }
+  .nav-item {
+    border-radius: 9999px;
+    min-width: 40px;
+    text-align: center;
+  }
+</style>
+<div class="max-w-3xl mx-auto p-6">
+  <a href="{% url 'novels:novel_detail' novel.id %}" class="text-blue-500 hover:underline mb-4 block">&larr; Quay lại {{ novel.title }}</a>
   <h1 class="text-3xl font-bold mb-2">Chương {{ chapter.chapter_number }}: {{ chapter.title }}</h1>
   <p class="text-sm text-gray-500 mb-4">Cập nhật: {{ chapter.created_at|date:"d/m/Y H:i" }}</p>
-
-  <div class="content prose max-w-full">
+  <div class="prose max-w-full">
     {{ chapter.content|linebreaks }}
   </div>
+  <div id="chapter-nav" class="sticky-nav">
+    {% if prev_chapter %}
+      <a href="{% url 'novels:chapter_detail' novel.id prev_chapter.id %}" class="nav-item bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">&larr;</a>
+    {% else %}
+      <button class="nav-item bg-gray-300 text-white px-4 py-2 rounded" disabled>&larr;</button>
+    {% endif %}
+    
+    <form method="get" onchange="if(this.value) window.location.href=this.value;">
+      <select class="border border-gray-300 rounded-full px-3 py-2" name="chapter">
+        {% for ch in novel.chapters.all %}
+          <option value="{% url 'novels:chapter_detail' novel.id ch.id %}" {% if ch.id == chapter.id %}selected{% endif %}>
+            Chương {{ ch.chapter_number }}: {{ ch.title|truncatechars:40 }}
+          </option>
+        {% endfor %}
+      </select>
+    </form>
+    
+    {% if next_chapter %}
+      <a href="{% url 'novels:chapter_detail' novel.id next_chapter.id %}" class="nav-item bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">&rarr;</a>
+    {% else %}
+      <button class="nav-item bg-gray-300 text-white px-4 py-2 rounded" disabled>&rarr;</button>
+    {% endif %}
+  </div>
 </div>
+<script>
+  let lastScrollY = window.scrollY;
+  const nav = document.getElementById('chapter-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('hidden', window.scrollY > lastScrollY);
+    lastScrollY = window.scrollY;
+  });
+</script>
 {% endblock %}

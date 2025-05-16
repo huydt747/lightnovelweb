@@ -41,5 +41,20 @@ def novel_detail(request, novel_id):
 def chapter_detail(request, novel_id, chapter_id):
     novel = get_object_or_404(Novel, id=novel_id)
     chapter = get_object_or_404(Chapter, id=chapter_id, novel=novel)
-    return render(request, 'novels/chapter_detail.html', {'novel': novel, 'chapter': chapter})
+
+    prev_chapter = Chapter.objects.filter(
+        novel=novel, chapter_number__lt=chapter.chapter_number
+    ).order_by('-chapter_number').first()
+
+    next_chapter = Chapter.objects.filter(
+        novel=novel, chapter_number__gt=chapter.chapter_number
+    ).order_by('chapter_number').first()
+
+    return render(request, 'novels/chapter_detail.html', {
+        'novel': novel,
+        'chapter': chapter,
+        'prev_chapter': prev_chapter,
+        'next_chapter': next_chapter,
+    })
+
 
