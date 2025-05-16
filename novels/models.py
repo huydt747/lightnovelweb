@@ -26,7 +26,6 @@ class Novel(models.Model):
     def __str__(self):
         return self.title
 
-
 class Chapter(models.Model):
     novel = models.ForeignKey(Novel, on_delete=models.CASCADE, related_name='chapters')
     title = models.CharField(max_length=255)

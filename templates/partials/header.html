@@ -1,25 +1,56 @@
 <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
-<nav class="bg-gray-900 text-white" x-data="{ open: false, userMenu: false }">
+<nav class="bg-gray-100 text-black shadow" x-data="{ open: false, categoryOpen: false, userMenu: false }">
     <div class="container mx-auto px-4 py-3 flex items-center justify-between">
         <!-- Logo -->
         <a href="{% url 'novels:novel_list' %}" class="text-xl font-semibold flex items-center gap-2">
-            📘 <span>LightNovel</span>
+            <img src="../../static/langhoatu.png" alt="" width="50">
+        <span>Lãng Hoa Tử</span>
         </a>
 
         <!-- Toggle Button (Mobile) -->
-        <button @click="open = !open" class="lg:hidden text-white focus:outline-none">
+        <button @click="open = !open" class="lg:hidden text-black focus:outline-none">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
                  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path x-show="!open" stroke-linecap="round" stroke-linejoin="round"
-                      d="M4 6h16M4 12h16M4 18h16"/>
-                <path x-show="open" stroke-linecap="round" stroke-linejoin="round"
-                      d="M6 18L18 6M6 6l12 12"/>
+                <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                <path x-show="open" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
             </svg>
         </button>
 
         <!-- Menu Items -->
+        <div class="hidden lg:flex items-center gap-6">
+            <a href="#" class="font-semibold hover:underline">Sáng tác</a>
+
+            <!-- Thể loại + Dropdown -->
+            <div class="relative" x-data="{ categoryOpen: false }">
+                <button @click="categoryOpen = !categoryOpen" class="font-semibold hover:underline flex items-center gap-1">
+                    Thể loại
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.23 8.29a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+                <div x-show="categoryOpen" @click.away="categoryOpen = false"
+                     class="absolute left-0 mt-2 w-40 bg-white text-black rounded shadow-lg z-50 text-sm py-2">
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100">Khoa học</a>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100">Giả tưởng</a>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100">Hài hước</a>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100">Kinh dị</a>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-100">Lãng mạn</a>
+                </div>
+            </div>
+
+            <a href="#" class="font-semibold hover:underline">Xuất bản</a>
+            <a href="#" class="font-semibold hover:underline">Thảo luận</a>
+            <a href="#" class="font-semibold hover:underline">Danh sách</a>
+            <a href="#" class="font-semibold hover:underline">Hướng dẫn</a>
+        </div>
+
+        <!-- Search + User -->
         <div class="flex items-center gap-4">
+            <div class="bg-gray-300 rounded-full px-3 py-1 text-sm text-gray-600">
+                Tối thiểu 2 kí tự
+            </div>
+
             <!-- Avatar & Dropdown -->
             <div class="relative" x-data="{ userMenu: false }">
                 <button @click="userMenu = !userMenu" class="focus:outline-none">

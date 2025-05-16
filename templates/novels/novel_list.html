@@ -1,22 +1,103 @@
 {% extends 'index.html' %}
 {% block title %}Trang chủ{% endblock %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/novel_animations.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1 class="mb-4">Danh sách Light Novels</h1>
-<div class="row">
-    {% for novel in novels %}
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <img src="{{ novel.cover_image.url }}" class="card-img-top" alt="{{ novel.title }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ novel.title }}</h5>
-                    <p class="card-text">{{ novel.description|truncatewords:20 }}</p>
-                    <a href="{% url 'novels:novel_detail' novel.id %}" class="btn btn-primary">Đọc ngay</a>
-                </div>
+<div class="container mx-auto px-4 py-6">
+
+    <!-- Tabs tiêu đề -->
+    <div class="flex justify-between items-start mb-6 flex-wrap">
+        <!-- Tabs bên trái -->
+        <div>
+            <ul class="flex space-x-4 text-sm font-semibold">
+                <li><a href="#" class="bg-yellow-500 text-white px-3 py-1 rounded shadow">🏆 Nổi bật</a></li>
+                <li><a href="#" class="text-gray-600 hover:text-black">Top tháng</a></li>
+                <li><a href="#" class="text-gray-600 hover:text-black">Toàn t/gian</a></li>
+            </ul>
+
+            <!-- Slider truyện nổi bật -->
+            <div class="flex space-x-4 mt-4 overflow-x-auto scrollbar-hide">
+                {% for featured in featured_novels %}
+                    <div class="w-40 flex-shrink-0 relative">
+                        <a href="{% url 'novels:novel_detail' featured.id %}">
+                            <img src="{{ featured.cover_image.url }}" alt="{{ featured.title }}"
+                                 class="rounded-md h-56 w-full object-cover shadow">
+                            <p class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 text-white text-sm font-semibold p-1 truncate">
+                                {{ featured.title }}
+                            </p>
+                        </a>
+                    </div>
+                {% endfor %}
             </div>
         </div>
-    {% empty %}
-        <p>Chưa có truyện nào.</p>
-    {% endfor %}
+
+        <!-- Bảng thảo luận -->
+        <div class="w-full sm:w-auto mt-6 sm:mt-0 sm:ml-6">
+            <div class="bg-white shadow-md rounded-md p-4 w-72">
+                <div class="flex space-x-2 font-semibold mb-3 text-sm">
+                    <span class="bg-gray-800 text-white px-2 py-1 rounded">Thảo Luận</span>
+
+                </div>
+                <ul class="text-sm space-y-2">
+                    {% for thread in recent_threads %}
+                        <li class="flex justify-between items-center">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-2.5 h-2.5 rounded-full {% if thread.status == 'hot' %}bg-pink-500{% elif thread.status == 'info' %}bg-cyan-400{% else %}bg-green-500{% endif %}"></span>
+                                <a href="{{ thread.url }}" class="truncate hover:underline text-gray-800">
+                                    {{ thread.title|truncatechars:35 }}
+                                </a>
+                            </div>
+                            <span class="text-xs text-gray-500 whitespace-nowrap">
+                                {{ thread.time }}
+                            </span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tiêu đề Light Novels mới -->
+    <div class="flex items-center mb-4">
+        <h2 class="text-2xl font-bold text-gray-800">Light Novels Mới Cập Nhật</h2>
+        <span class="ml-2 text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded">Update</span>
+    </div>
+
+    <!-- Grid truyện -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+        {% for novel in novels %}
+            <div class="bg-white rounded-md shadow hover:shadow-lg transition overflow-hidden group">
+                <a href="{% url 'novels:novel_detail' novel.id %}">
+                    <div class="relative">
+                        <img src="{{ novel.cover_image.url }}" alt="{{ novel.title }}"
+                             class="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                        {% if novel.is_hot %}
+                            <span class="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded shadow">HOT</span>
+                        {% endif %}
+                    </div>
+                </a>
+                <div class="p-2">
+                    <a href="{% url 'novels:novel_detail' novel.id %}" class="font-semibold text-sm text-gray-800 line-clamp-2 hover:text-blue-600">
+                        {{ novel.title }}
+                    </a>
+                    <div class="mt-1 space-y-0.5 text-xs text-gray-600">
+                        {% for chapter in novel.latest_chapters.all %}
+                            <div class="flex justify-between">
+                                <a href="{% url 'novels:chapter_detail' novel.id chapter.id %}" class="hover:text-blue-500">
+                                    Ch. {{ chapter.number }}
+                                </a>
+                                <span class="text-gray-400 whitespace-nowrap">{{ chapter.updated_at|timesince }} trước</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
 </div>
 {% endblock %}
