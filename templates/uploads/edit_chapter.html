@@ -1,0 +1,73 @@
+{% extends "index.html" %} {% block title %}Chỉnh sửa chương - {{ chapter.title }}{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto py-8 px-4"> <div class="mb-6"> <div class="flex items-center justify-between"> <h1 class="text-2xl font-bold text-gray-800">{{ novel_upload.title }}</h1> <a href="{% url 'upload_chapter' novel_upload_id=novel_upload.id %}" class="text-blue-600 hover:text-blue-800 flex items-center"> <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /> </svg> Quay lại danh sách chương </a> </div> <p class="text-sm text-gray-600">Tác giả: {{ novel_upload.author }}</p> </div>
+
+<div class="bg-white shadow-md rounded-lg p-6">
+    <h2 class="text-xl font-bold mb-6 text-gray-800">Chỉnh sửa chương</h2>
+    
+    <form method="post" class="space-y-6">
+        {% csrf_token %}
+        
+        {% if form.non_field_errors %}
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="md:col-span-3">
+                <!-- Tiêu đề -->
+                <div class="mb-4">
+                    <label for="{{ form.title.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Tiêu đề chương</label>
+                    <input type="text" name="{{ form.title.name }}" id="{{ form.title.id_for_label }}" value="{{ form.title.value|default:'' }}" 
+                        class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    {% if form.title.errors %}
+                        <p class="text-red-500 text-xs mt-1">{{ form.title.errors }}</p>
+                    {% endif %}
+                </div>
+                
+                <!-- Nội dung -->
+                <div class="mb-4">
+                    <label for="{{ form.content.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Nội dung</label>
+                    <textarea name="{{ form.content.name }}" id="{{ form.content.id_for_label }}" rows="15"
+                        class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">{{ form.content.value|default:'' }}</textarea>
+                    {% if form.content.errors %}
+                        <p class="text-red-500 text-xs mt-1">{{ form.content.errors }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="md:col-span-1">
+                <!-- Chương số -->
+                <div class="mb-4">
+                    <label for="{{ form.chapter_number.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Chương số</label>
+                    <input type="number" name="{{ form.chapter_number.name }}" id="{{ form.chapter_number.id_for_label }}" value="{{ form.chapter_number.value|default:'1' }}" 
+                        class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    {% if form.chapter_number.errors %}
+                        <p class="text-red-500 text-xs mt-1">{{ form.chapter_number.errors }}</p>
+                    {% endif %}
+                </div>
+                
+                <!-- Thông tin thêm -->
+                <div class="mt-6 bg-gray-50 p-4 rounded-md">
+                    <h3 class="text-sm font-medium text-gray-700 mb-2">Thông tin</h3>
+                    <div class="space-y-2 text-sm text-gray-500">
+                        <p>Đăng ngày: {{ chapter.uploaded_at|date:"d/m/Y H:i" }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex justify-end space-x-3">
+            <a href="{% url 'upload_chapter' novel_upload_id=novel_upload.id %}" class="bg-gray-100 text-gray-800 hover:bg-gray-200 font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                Hủy
+            </a>
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Lưu thay đổi
+            </button>
+        </div>
+    </form>
+</div>
+
+</div> {% endblock %}

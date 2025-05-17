@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'novels',
     'users',
     'comments',
+    'uploads',
 ]
 
 MIDDLEWARE = [

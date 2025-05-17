@@ -1,0 +1,93 @@
+{% extends "index.html" %} {% block title %}Thêm chương - {{ novel_upload.title }}{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto py-6 px-4"> <div class="mb-6"> <h1 class="text-2xl font-bold text-gray-800">{{ novel_upload.title }}</h1> <p class="text-sm text-gray-600">Tác giả: {{ novel_upload.author }}</p> </div>
+
+<div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <!-- Tab navigation -->
+    <div class="bg-gray-100 px-4 py-3 border-b flex space-x-8">
+        <a href="#" class="text-blue-600 font-medium border-b-2 border-blue-600 py-3 px-1">Thêm chương mới</a>
+        <a href="{% url 'edit_novel_upload' novel_upload_id=novel_upload.id %}" class="text-gray-500 hover:text-gray-700 py-3 px-1">Chỉnh sửa thông tin</a>
+    </div>
+    
+    <!-- Form thêm chương -->
+    <div class="p-6">
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="md:col-span-3">
+                    <!-- Tiêu đề -->
+                    <div class="mb-4">
+                        <label for="{{ form.title.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Tiêu đề chương</label>
+                        <input type="text" name="{{ form.title.name }}" id="{{ form.title.id_for_label }}" value="{{ form.title.value|default:'' }}" 
+                            class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        {% if form.title.errors %}
+                            <p class="text-red-500 text-xs mt-1">{{ form.title.errors }}</p>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Nội dung -->
+                    <div class="mb-4">
+                        <label for="{{ form.content.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Nội dung</label>
+                        <textarea name="{{ form.content.name }}" id="{{ form.content.id_for_label }}" rows="15"
+                            class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">{{ form.content.value|default:'' }}</textarea>
+                        {% if form.content.errors %}
+                            <p class="text-red-500 text-xs mt-1">{{ form.content.errors }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="md:col-span-1">
+                    <!-- Chương số -->
+                    <div class="mb-4">
+                        <label for="{{ form.chapter_number.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Chương số</label>
+                        <input type="number" name="{{ form.chapter_number.name }}" id="{{ form.chapter_number.id_for_label }}" value="{{ form.chapter_number.value|default:'1' }}" 
+                            class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        {% if form.chapter_number.errors %}
+                            <p class="text-red-500 text-xs mt-1">{{ form.chapter_number.errors }}</p>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Danh sách chương -->
+                    <div class="mt-6">
+                        <h3 class="text-sm font-medium text-gray-700 mb-2">Các chương đã thêm</h3>
+                        {% if chapters %}
+                            <div class="space-y-1 max-h-96 overflow-y-auto pr-2">
+                                {% for chapter in chapters %}
+                                    <div class="flex justify-between items-center py-2 px-3 bg-gray-50 hover:bg-gray-100 rounded text-sm">
+                                        <span>Chương {{ chapter.chapter_number }}: {{ chapter.title|truncatechars:20 }}</span>
+                                        <a href="{% url 'edit_chapter' chapter_id=chapter.id %}" class="text-blue-600 hover:text-blue-800">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p class="text-sm text-gray-500 italic">Chưa có chương nào</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-end space-x-3">
+                <button type="submit" name="save_and_add" class="bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                    Lưu và thêm chương mới
+                </button>
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Lưu và hoàn thành
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</div> {% endblock %}

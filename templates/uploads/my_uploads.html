@@ -1,0 +1,97 @@
+{% extends "index.html" %} {% block title %}Truyện của tôi{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto py-8 px-4"> <div class="flex justify-between items-center mb-6"> <h1 class="text-2xl font-bold text-gray-800">Truyện của tôi</h1> <a href="{% url 'upload_novel' %}" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"> Tạo truyện mới </a> </div>
+
+{% if uploads %}
+    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Truyện
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Chương
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Đăng ngày
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Thao tác
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                {% for upload in uploads %}
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 flex-shrink-0">
+                                {% if upload.cover_image %}
+                                <img class="h-10 w-10 rounded-full object-cover" src="{{ upload.cover_image.url }}" alt="{{ upload.title }}">
+                                {% else %}
+                                <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
+                                    <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                    </svg>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="ml-4">
+                                <div class="text-sm font-medium text-gray-900">
+                                    {% if upload.novel %}
+                                    <a href="{% url 'novel_detail' novel_id=upload.novel.id %}" class="hover:text-blue-600">
+                                        {{ upload.title }}
+                                    </a>
+                                    {% else %}
+                                    {{ upload.title }}
+                                    {% endif %}
+                                </div>
+                                <div class="text-sm text-gray-500">
+                                    {{ upload.author }}
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900">{{ upload.chapters.count }}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900">{{ upload.uploaded_at|date:"d/m/Y" }}</div>
+                        <div class="text-sm text-gray-500">{{ upload.uploaded_at|time:"H:i" }}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <div class="flex space-x-3 justify-end">
+                            <a href="{% url 'upload_chapter' novel_upload_id=upload.id %}" class="text-blue-600 hover:text-blue-900">
+                                Thêm chương
+                            </a>
+                            <a href="{% url 'edit_novel_upload' novel_upload_id=upload.id %}" class="text-green-600 hover:text-green-900">
+                                Chỉnh sửa
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="bg-white shadow-md rounded-lg p-6 text-center">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        </svg>
+        <h3 class="mt-2 text-sm font-medium text-gray-900">Chưa có truyện nào</h3>
+        <p class="mt-1 text-sm text-gray-500">Hãy bắt đầu bằng việc tạo một truyện mới.</p>
+        <div class="mt-6">
+            <a href="{% url 'upload_novel' %}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                Tạo truyện mới
+            </a>
+        </div>
+    </div>
+{% endif %}
+
+</div> {% endblock %}

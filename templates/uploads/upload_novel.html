@@ -1,0 +1,98 @@
+{% extends "index.html" %} {% block title %}Tải lên truyện mới{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto py-8 px-4"> <div class="bg-white shadow-md rounded-lg p-6"> <h1 class="text-2xl font-bold mb-6 text-gray-800">Tải lên truyện mới</h1>
+
+    <form method="post" enctype="multipart/form-data" class="space-y-6">
+        {% csrf_token %}
+        
+        {% if form.non_field_errors %}
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+        
+        <div class="space-y-4">
+            <!-- Tiêu đề -->
+            <div>
+                <label for="{{ form.title.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Tiêu đề truyện</label>
+                {{ form.title }}
+                {% if form.title.errors %}
+                    <p class="text-red-500 text-xs mt-1">{{ form.title.errors }}</p>
+                {% endif %}
+            </div>
+            
+            <!-- Tác giả -->
+            <div>
+                <label for="{{ form.author.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Tác giả</label>
+                {{ form.author }}
+                {% if form.author.errors %}
+                    <p class="text-red-500 text-xs mt-1">{{ form.author.errors }}</p>
+                {% endif %}
+            </div>
+            
+            <!-- Mô tả -->
+            <div>
+                <label for="{{ form.description.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Mô tả</label>
+                {{ form.description }}
+                {% if form.description.errors %}
+                    <p class="text-red-500 text-xs mt-1">{{ form.description.errors }}</p>
+                {% endif %}
+            </div>
+            
+            <!-- Ảnh bìa -->
+            <div>
+                <label for="{{ form.cover_image.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Ảnh bìa</label>
+                <div class="mt-1 flex items-center">
+                    <span class="inline-block h-12 w-12 rounded-md overflow-hidden bg-gray-100">
+                        <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </span>
+                    <label class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer">
+                        <span>Tải ảnh lên</span>
+                        {{ form.cover_image }}
+                    </label>
+                </div>
+                {% if form.cover_image.errors %}
+                    <p class="text-red-500 text-xs mt-1">{{ form.cover_image.errors }}</p>
+                {% endif %}
+            </div>
+            
+            <!-- Thể loại -->
+            <div>
+                <span class="block text-sm font-medium text-gray-700 mb-2">Thể loại</span>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+                    {% for choice in form.genres %}
+                        <div class="flex items-start">
+                            <div class="flex items-center h-5">
+                                {{ choice.tag }}
+                            </div>
+                            <div class="ml-3 text-sm">
+                                <label for="{{ choice.id_for_label }}" class="font-medium text-gray-700">{{ choice.choice_label }}</label>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% if form.genres.errors %}
+                    <p class="text-red-500 text-xs mt-1">{{ form.genres.errors }}</p>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="flex justify-end">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Tạo truyện và tiếp tục
+            </button>
+        </div>
+    </form>
+</div>
+
+</div> {% endblock %}
+
+{% block extra_js %}
+<script> // Ẩn input file và hiển thị tên file khi chọn
+    document.addEventListener('DOMContentLoaded', function() { const fileInput = document.querySelector('input[type="file"]'); fileInput.style.display = 'none'; fileInput.addEventListener('change', function() { const fileName = this.files[0] ? this.files[0].name : ''; if (fileName) { const label = this.nextElementSibling || this.parentElement.querySelector('span'); if (label) { label.textContent = fileName; } } }); });
+</script>
+
+{% endblock %}
