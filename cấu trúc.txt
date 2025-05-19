@@ -25,6 +25,8 @@ lightnovel_project/
 │   ├── views.py
 │   ├── urls.py
 
+├── uploads/  
+
 
 ├── templates/                     ← Template chung
 │   └── index.html
@@ -41,6 +43,7 @@ lightnovel_project/
 	├── auth.html
 	├── profile.html
 	├── saved.html
+	comments/  
 
 ├── static/                        ← CSS, JS, hình ảnh
 │   ├── css/
