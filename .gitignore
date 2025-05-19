@@ -88,3 +88,6 @@ desktop.ini
 
 # Local settings
 local_settings.py
+/comments/__pycache__
+/comments/__pycache__
+*.pyc
