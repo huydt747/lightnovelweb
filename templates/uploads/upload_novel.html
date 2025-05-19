@@ -91,7 +91,7 @@
 </div> {% endblock %}
 
 {% block extra_js %}
-<script> // Ẩn input file và hiển thị tên file khi chọn
+<script>
     document.addEventListener('DOMContentLoaded', function() { const fileInput = document.querySelector('input[type="file"]'); fileInput.style.display = 'none'; fileInput.addEventListener('change', function() { const fileName = this.files[0] ? this.files[0].name : ''; if (fileName) { const label = this.nextElementSibling || this.parentElement.querySelector('span'); if (label) { label.textContent = fileName; } } }); });
 </script>
 
