@@ -41,7 +41,7 @@
                             <div class="ml-4">
                                 <div class="text-sm font-medium text-gray-900">
                                     {% if upload.novel %}
-                                    <a href="{% url 'novel_detail' novel_id=upload.novel.id %}" class="hover:text-blue-600">
+                                    <a href="{% url 'novels:novel_detail' novel_id=upload.novel.id %}" class="hover:text-blue-600">
                                         {{ upload.title }}
                                     </a>
                                     {% else %}

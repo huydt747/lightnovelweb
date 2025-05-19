@@ -14,7 +14,7 @@ class NovelUpload(models.Model):
     description = models.TextField()
     author = models.CharField(max_length=255)
     cover_image = models.ImageField(upload_to='uploads/covers/', blank=True, null=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='approved')  # Mặc định là approved
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='approved')
     novel = models.ForeignKey(Novel, on_delete=models.SET_NULL, null=True, blank=True, related_name='uploads')
     uploaded_at = models.DateTimeField(auto_now_add=True)
     

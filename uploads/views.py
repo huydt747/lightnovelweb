@@ -71,7 +71,7 @@ def upload_chapter(request, novel_upload_id):
             if 'save_and_add' in request.POST:
                 return redirect('upload_chapter', novel_upload_id=novel_upload.id)
             else:
-                return redirect('novel_detail', novel_id=novel_upload.novel.id)
+                return redirect('novels:novel_detail', novel_id=novel_upload.novel.id)
     else:
         # Tự động điền số chương tiếp theo
         next_chapter = novel_upload.chapters.count() + 1

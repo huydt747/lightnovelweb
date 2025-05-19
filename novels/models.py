@@ -17,7 +17,7 @@ class Novel(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     author = models.CharField(max_length=255, blank=True)
-    cover_image = models.ImageField(upload_to='covers/', blank=True, null=True)
+    cover_image = models.ImageField(upload_to='uploads/covers/', blank=True, null=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='ongoing')
     genres = models.ManyToManyField(Genre, related_name='novels')
     created_at = models.DateTimeField(auto_now_add=True)
