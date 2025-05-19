@@ -120,51 +120,53 @@
         </div>
       </div>
 
-      <!-- Saved Novels Section -->
-      <div class="mt-12">
-  <div class="flex items-center justify-between mb-6">
-    <h2 class="text-2xl font-bold text-gray-900">Truyện đã lưu</h2>
-    <a href="{% url 'users:saved_novels' %}" class="text-blue-600 hover:text-blue-800 flex items-center">
-      Xem tất cả
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-      </svg>
-    </a>
-  </div>
+<div class="container mx-auto px-4 py-8">
+    <div class="flex items-center justify-between mb-8">
+        <h1 class="text-2xl font-bold text-gray-900">Truyện đã đăng</h1>
+        <a href="{% url 'upload_novel' %}" class="text-blue-600 hover:text-blue-800 flex items-center">
+            Đăng truyện mới
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+            </svg>
+        </a>
+    </div>
 
-  {% if saved_novels %}
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    {% for saved in saved_novels|slice:":3" %}
-    <div class="bg-white shadow rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-200">
-      <a href="{% url 'novels:novel_detail' saved.novel.id %}" class="block p-5 hover:bg-gray-50">
-        <h3 class="text-lg font-semibold text-gray-900 truncate">{{ saved.novel.title }}</h3>
-        <div class="mt-2 flex justify-between items-center text-sm text-gray-500">
-          <span>Lưu ngày: {{ saved.saved_at|date:"d/m/Y" }}</span>
-          <span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full text-xs font-medium">
-            Chương {{ saved.novel.latest_chapter.number|default:"0" }}
-          </span>
+    {% if novels %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for novel in novels %}
+        <div class="bg-white shadow rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-200">
+            <a href="{% url 'novel_detail' novel.id %}" class="block">
+                <img src="{{ novel.cover_image.url }}" alt="{{ novel.title }}" class="w-full h-48 object-cover">
+                <div class="p-5">
+                    <h3 class="text-lg font-semibold text-gray-900 truncate">{{ novel.title }}</h3>
+                    <div class="mt-2 flex justify-between items-center text-sm text-gray-500">
+                        <span>Đăng ngày: {{ novel.created_at|date:"d/m/Y" }}</span>
+                        <span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full text-xs font-medium">
+                            {{ novel.chapter_set.count }} chương
+                        </span>
+                    </div>
+                </div>
+            </a>
         </div>
-      </a>
+        {% endfor %}
     </div>
-    {% endfor %}
-  </div>
-  {% else %}
-  <div class="bg-white text-center py-12 rounded-lg shadow">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-    </svg>
-    <h3 class="mt-4 text-lg font-semibold text-gray-900">Chưa có truyện nào được lưu</h3>
-    <p class="mt-2 text-gray-500">Hãy bắt đầu lưu những truyện bạn yêu thích để tiện theo dõi và đọc sau.</p>
-    <div class="mt-6">
-      <a href="{% url 'novels:novel_list' %}" class="inline-flex items-center px-4 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    {% else %}
+    <div class="bg-white text-center py-12 rounded-lg shadow">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
         </svg>
-        Khám phá truyện mới
-      </a>
+        <h3 class="mt-4 text-lg font-semibold text-gray-900">Bạn chưa đăng truyện nào</h3>
+        <p class="mt-2 text-gray-500">Hãy bắt đầu đăng truyện của bạn để chia sẻ với mọi người.</p>
+        <div class="mt-6">
+            <a href="{% url 'upload_novel' %}" class="inline-flex items-center px-4 py-2 text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+                Đăng truyện mới
+            </a>
+        </div>
     </div>
-  </div>
-  {% endif %}
+    {% endif %}
 </div>
 
   </div>
