@@ -1,146 +1,264 @@
 {% extends 'index.html' %}
-{% block title %}Trang chủ{% endblock %}
+{% block title %}Trang chủ - Light Novels{% endblock %}
 
 {% block content %}
-<div class="container mx-auto px-4 py-6">
+<div class="container mx-auto px-4 py-8 max-w-7xl">
+    <!-- Header Section -->
+    <header class="mb-12 text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">
+            Khám Phá Light Novels
+        </h1>
+        <p class="mt-2 text-lg text-gray-600">Hành trình vào thế giới truyện đầy sắc màu!</p>
+    </header>
 
-    <!-- Tabs tiêu đề -->
-    <div class="flex justify-between items-start mb-6 flex-wrap">
-
-            <!-- Slider truyện nổi bật -->
-    <div class="flex-1">
-        <ul class="flex space-x-4 text-sm font-semibold">
-            <li><a href="#" class="bg-yellow-500 text-white px-3 py-1 rounded shadow">🏆 Nổi bật</a></li>
-            <li><a href="#" class="text-gray-600 hover:text-black">Top tháng</a></li>
-            <li><a href="#" class="text-gray-600 hover:text-black">Toàn t/gian</a></li>
-        </ul>
-
-        <!-- Slider sử dụng cùng dữ liệu novels -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mt-4">
-            {% for novel in novels|slice:":6" %}
-            <div class="bg-white rounded-md shadow hover:shadow-lg transition overflow-hidden group">
-                <a href="{% url 'novels:novel_detail' novel.id %}">
-                    <div class="relative">
-                        <img src="{{ novel.cover_image.url }}" alt="{{ novel.title }}"
-                             class="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-105">
-                        {% if novel.is_hot %}
-                            <span class="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded shadow">HOT</span>
-                        {% endif %}
-                    </div>
-                </a>
-                <div class="p-2">
-                    <a href="{% url 'novels:novel_detail' novel.id %}" class="font-semibold text-sm text-gray-800 line-clamp-2 hover:text-blue-600">
-                        {{ novel.title }}
-                    </a>
-                    <div class="mt-1 space-y-0.5 text-xs text-gray-600">
-                        {% for chapter in novel.latest_chapters.all %}
-                            <div class="flex justify-between">
-                                <a href="{% url 'novels:chapter_detail' novel.id chapter.id %}" class="hover:text-blue-500">
-                                    Ch. {{ chapter.number }}
-                                </a>
-                                <span class="text-gray-400 whitespace-nowrap">{{ chapter.updated_at|timesince }} trước</span>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+    <!-- Light Novels Mới Cập Nhật Section -->
+    <section class="mb-16">
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-3xl font-bold text-gray-800">Light Novels Mới Cập Nhật</h2>
+            <span class="inline-flex items-center bg-blue-600 text-white text-sm font-medium px-3 py-1 rounded-full">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Mới Nhất
+            </span>
         </div>
-    </div>
-
-        <!-- Bảng thảo luận -->
-        <div class="w-full sm:w-auto mt-6 sm:mt-0 sm:ml-6">
-            <div class="bg-white shadow-md rounded-md p-4 w-72">
-                <div class="flex items-center justify-between mb-3">
-                    <span class="font-semibold text-sm bg-gray-800 text-white px-2 py-1 rounded">Bình Luận Mới</span>
-                    <span class="text-xs text-gray-500">{{ recent_comments.count }} bình luận</span>
-                </div>
-                
-                <ul class="text-sm space-y-3">
-                    {% for comment in recent_comments %}
-                    <li class="group">
-                        <div class="flex items-start space-x-2">
-                            <!-- Avatar -->
-                            <div class="flex-shrink-0">
-                                <img src="{{ comment.user.profile.avatar.url|default:'/static/images/default-avatar.png' }}" 
-                                     class="w-6 h-6 rounded-full object-cover border border-gray-200"
-                                     alt="{{ comment.user.username }}">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+            {% for novel in novels %}
+                {% if novel.id %}
+                    <div class="relative bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                        <a href="{% url 'novels:novel_detail' novel.id %}" class="block">
+                            <div class="relative">
+                                <img src="{{ novel.cover_image.url|default:'/static/images/default.jpg' }}" 
+                                     alt="{{ novel.title }}"
+                                     class="h-64 w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                                {% if novel.is_hot %}
+                                    <span class="absolute top-3 right-3 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">HOT</span>
+                                {% endif %}
                             </div>
-                            
-                            <!-- Nội dung -->
-                            <div class="flex-1 min-w-0">
-                                <div class="flex items-center">
-                                    <a href="#" class="font-medium text-gray-800 hover:underline truncate">
-                                        {{ comment.user.username }}
+                        </a>
+                        <div class="p-4">
+                            <!-- Tên truyện -->
+                            <a href="{% url 'novels:novel_detail' novel.id %}" 
+                               class="font-semibold text-lg text-gray-800 hover:text-blue-600 line-clamp-2 transition-colors">
+                                {{ novel.title }}
+                            </a>
+                            <!-- Thể loại -->
+                            <div class="mt-2 flex flex-wrap gap-2">
+                                {% for genre in novel.genres.all %}
+                                    <span class="bg-blue-100 text-blue-700 text-xs font-medium px-2 py-1 rounded-full">
+                                        {{ genre.name }}
+                                    </span>
+                                {% endfor %}
+                            </div>
+                            <!-- Chương mới nhất -->
+                            {% if novel.latest_chapter %}
+                                <div class="mt-2 text-sm text-blue-600">
+                                    <a href="{% url 'novels:chapter_detail' novel.id novel.latest_chapter.id %}" 
+                                       class="hover:underline flex items-center">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.5v11m-6-5.5h12"></path>
+                                        </svg>
+                                        Chương {{ novel.latest_chapter.chapter_number }}
                                     </a>
-                                    <span class="ml-2 text-xs text-gray-500">{{ comment.created_at|timesince }} trước</span>
                                 </div>
-                                <a href="#comment-{{ comment.id }}" class="block text-gray-600 hover:text-gray-800 mt-1 line-clamp-2">
-                                    {{ comment.content }}
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="text-red-600 text-center">Dữ liệu truyện không hợp lệ</div>
+                {% endif %}
+            {% endfor %}
+            {% if not novels %}
+                <p class="text-gray-600 text-lg text-center col-span-full">🚫 Chưa có truyện nào được cập nhật.</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Thể loại id=1 Section -->
+<section class="mb-16">
+    <div class="relative bg-gradient-to-r from-green-600 to-teal-600 rounded-2xl p-8 mb-8 shadow-xl text-center text-white overflow-hidden">
+        <div class="absolute inset-0 bg-[url('/static/images/genre1-bg.jpg')] bg-cover bg-center opacity-20"></div>
+        <h2 class="relative text-3xl md:text-4xl font-extrabold tracking-tight">Thể Loại {{ genre_one.name }}</h2>
+        <p class="relative mt-2 text-lg text-white/80">Khám phá những câu chuyện đầy hấp dẫn thuộc thể loại {{ genre_one.name }}!</p>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+        {% for novel in one_novels %}
+            {% if novel.id %}
+                <div class="relative bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                    <a href="{% url 'novels:novel_detail' novel.id %}" class="block">
+                        <div class="relative">
+                            <img src="{{ novel.cover_image.url|default:'/static/images/default.jpg' }}" 
+                                 alt="{{ novel.title }}"
+                                 class="h-64 w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                            {% if novel.is_hot %}
+                                <span class="absolute top-3 right-3 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">HOT</span>
+                            {% endif %}
+                        </div>
+                    </a>
+                    <div class="p-4">
+                        <a href="{% url 'novels:novel_detail' novel.id %}" 
+                           class="font-semibold text-lg text-gray-800 hover:text-blue-600 line-clamp-2 transition-colors">
+                            {{ novel.title }}
+                        </a>
+                        <div class="mt-2 flex flex-wrap gap-2">
+                            {% for genre in novel.genres.all %}
+                                <span class="bg-blue-100 text-blue-700 text-xs font-medium px-2 py-1 rounded-full">
+                                    {{ genre.name }}
+                                </span>
+                            {% endfor %}
+                        </div>
+                        {% if novel.latest_chapter %}
+                            <div class="mt-2 text-sm text-blue-600">
+                                <a href="{% url 'novels:chapter_detail' novel.id novel.latest_chapter.id %}" 
+                                   class="hover:underline flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.5v11m-6-5.5h12"></path>
+                                    </svg>
+                                    Chương {{ novel.latest_chapter.chapter_number }}
                                 </a>
                             </div>
-                        </div>
-                    </li>
-                    {% empty %}
-                    <li class="text-center py-2 text-gray-500 text-sm">
-                        Chưa có bình luận nào
-                    </li>
-                    {% endfor %}
-                </ul>
-                
-                {% if recent_comments.count > 3 %}
-                <div class="mt-3 text-center">
-                    <a href="#comment-section" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
-                        Xem tất cả bình luận →
-                    </a>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-
-    <!-- Tiêu đề Light Novels mới -->
-    <div class="flex items-center mb-4">
-        <h2 class="text-2xl font-bold text-gray-800">Light Novels Mới Cập Nhật</h2>
-        <span class="ml-2 text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded">Update</span>
-    </div>
-
-    <!-- Grid truyện -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-        {% for novel in novels %}
-            <div class="bg-white rounded-md shadow hover:shadow-lg transition overflow-hidden group">
-                <a href="{% url 'novels:novel_detail' novel.id %}">
-                    <div class="relative">
-                        <img src="{{ novel.cover_image.url }}" alt="{{ novel.title }}"
-                             class="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-105">
-                        {% if novel.is_hot %}
-                            <span class="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded shadow">HOT</span>
                         {% endif %}
                     </div>
-                </a>
-                <div class="p-2">
-                    <a href="{% url 'novels:novel_detail' novel.id %}" class="font-semibold text-sm text-gray-800 line-clamp-2 hover:text-blue-600">
-                        {{ novel.title }}
+                </div>
+            {% else %}
+                <div class="text-red-600 text-center">Dữ liệu truyện không hợp lệ</div>
+            {% endif %}
+        {% endfor %}
+        {% if not one_novels %}
+            <p class="text-gray-600 text-lg text-center col-span-full">🚫 Không có truyện nào thuộc thể loại {{ genre_one.name }}.</p>
+        {% endif %}
+    </div>
+    <p class="mt-6 text-center text-lg">
+        📌 <span class="text-blue-600 font-bold">Tổng số truyện {{ genre_one.name }}:</span> 
+        <span class="text-gray-900 font-extrabold">{{ one_novels|length }}</span>
+    </p>
+</section>
+
+
+<!-- Thể loại Hành động Section (id=2) -->
+<section class="mb-16">
+    <div class="relative bg-gradient-to-r from-red-600 to-pink-600 rounded-2xl p-8 mb-8 shadow-xl text-center text-white overflow-hidden">
+        <div class="absolute inset-0 bg-[url('/static/images/action-bg.jpg')] bg-cover bg-center opacity-20"></div>
+        <h2 class="relative text-3xl md:text-4xl font-extrabold tracking-tight">Thể Loại {{ genre_action.name }}</h2>
+        <p class="relative mt-2 text-lg text-white/80">Khám phá những câu chuyện kịch tính và đầy năng lượng thuộc thể loại {{ genre_action.name }}!</p>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+        {% for novel in action_novels %}
+            {% if novel.id %}
+                <div class="relative bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                    <a href="{% url 'novels:novel_detail' novel.id %}" class="block">
+                        <div class="relative">
+                            <img src="{{ novel.cover_image.url|default:'/static/images/default.jpg' }}" 
+                                 alt="{{ novel.title }}"
+                                 class="h-64 w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                            {% if novel.is_hot %}
+                                <span class="absolute top-3 right-3 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">HOT</span>
+                            {% endif %}
+                        </div>
                     </a>
-                    <div class="mt-1 space-y-0.5 text-xs text-gray-600">
-                        {% for chapter in novel.latest_chapters.all %}
-                            <div class="flex justify-between">
-                                <a href="{% url 'novels:chapter_detail' novel.id chapter.id %}" class="hover:text-blue-500">
-                                    Ch. {{ chapter.number }}
+                    <div class="p-4">
+                        <a href="{% url 'novels:novel_detail' novel.id %}" 
+                           class="font-semibold text-lg text-gray-800 hover:text-blue-600 line-clamp-2 transition-colors">
+                            {{ novel.title }}
+                        </a>
+                        <div class="mt-2 flex flex-wrap gap-2">
+                            {% for genre in novel.genres.all %}
+                                <span class="bg-blue-100 text-blue-700 text-xs font-medium px-2 py-1 rounded-full">
+                                    {{ genre.name }}
+                                </span>
+                            {% endfor %}
+                        </div>
+                        {% if novel.latest_chapter %}
+                            <div class="mt-2 text-sm text-blue-600">
+                                <a href="{% url 'novels:chapter_detail' novel.id novel.latest_chapter.id %}" 
+                                   class="hover:underline flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.5v11m-6-5.5h12"></path>
+                                    </svg>
+                                    Chương {{ novel.latest_chapter.chapter_number }}
                                 </a>
-                                <span class="text-gray-400 whitespace-nowrap">{{ chapter.updated_at|timesince }} trước</span>
                             </div>
-                        {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
-            </div>
+            {% else %}
+                <div class="text-red-600 text-center">Dữ liệu truyện không hợp lệ</div>
+            {% endif %}
         {% endfor %}
+        {% if not action_novels %}
+            <p class="text-gray-600 text-lg text-center col-span-full">🚫 Không có truyện nào thuộc thể loại {{ genre_action.name }}.</p>
+        {% endif %}
     </div>
+    <p class="mt-6 text-center text-lg">
+        📌 <span class="text-blue-600 font-bold">Tổng số truyện {{ genre_action.name }}:</span> 
+        <span class="text-gray-900 font-extrabold">{{ action_novels|length }}</span>
+    </p>
+</section>
 
-    <!-- Phần bình luận chính -->
-    <div id="comment-section" class="mt-8">
-        <!-- Thêm phần bình luận chính ở đây nếu cần -->
-    </div>
+
+    <!-- Siêu nhiên Section -->
+    <section class="mb-16">
+        <div class="relative bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 mb-8 shadow-xl text-center text-white overflow-hidden">
+            <div class="absolute inset-0 bg-[url('/static/images/supernatural-bg.jpg')] bg-cover bg-center opacity-20"></div>
+            <h2 class="relative text-3xl md:text-4xl font-extrabold tracking-tight">Thể Loại Siêu Nhiên</h2>
+            <p class="relative mt-2 text-lg text-white/80">Khám phá những câu chuyện huyền bí và đầy lôi cuốn!</p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+            {% for novel in supernatural_novels %}
+                {% if novel.id %}
+                    <div class="relative bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+                        <a href="{% url 'novels:novel_detail' novel.id %}" class="block">
+                            <div class="relative">
+                                <img src="{{ novel.cover_image.url|default:'/static/images/default.jpg' }}" 
+                                     alt="{{ novel.title }}"
+                                     class="h-64 w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                                {% if novel.is_hot %}
+                                    <span class="absolute top-3 right-3 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">HOT</span>
+                                {% endif %}
+                            </div>
+                        </a>
+                        <div class="p-4">
+                            <!-- Tên truyện -->
+                            <a href="{% url 'novels:novel_detail' novel.id %}" 
+                               class="font-semibold text-lg text-gray-800 hover:text-blue-600 line-clamp-2 transition-colors">
+                                {{ novel.title }}
+                            </a>
+                            <!-- Thể loại -->
+                            <div class="mt-2 flex flex-wrap gap-2">
+                                {% for genre in novel.genres.all %}
+                                    <span class="bg-blue-100 text-blue-700 text-xs font-medium px-2 py-1 rounded-full">
+                                        {{ genre.name }}
+                                    </span>
+                                {% endfor %}
+                            </div>
+                            <!-- Chương mới nhất -->
+                            {% if novel.latest_chapter %}
+                                <div class="mt-2 text-sm text-blue-600">
+                                    <a href="{% url 'novels:chapter_detail' novel.id novel.latest_chapter.id %}" 
+                                       class="hover:underline flex items-center">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.5v11m-6-5.5h12"></path>
+                                        </svg>
+                                        Chương {{ novel.latest_chapter.chapter_number }}
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="text-red-600 text-center">Dữ liệu truyện không hợp lệ</div>
+                {% endif %}
+            {% endfor %}
+            {% if not supernatural_novels %}
+                <p class="text-gray-600 text-lg text-center col-span-full">🚫 Không có truyện nào thuộc thể loại Siêu nhiên.</p>
+            {% endif %}
+        </div>
+        <!-- Tổng số truyện Siêu nhiên -->
+        <p class="mt-6 text-center text-lg">
+            📌 <span class="text-blue-600 font-bold">Tổng số truyện Siêu nhiên:</span> 
+            <span class="text-gray-900 font-extrabold">{{ supernatural_novels|length }}</span>
+        </p>
+    </section>
 
 </div>
 {% endblock %}

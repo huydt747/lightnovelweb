@@ -2,9 +2,58 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Novel, Chapter, Genre
 from comments.forms import CommentForm
 
+def homepage(request):
+    try:
+        supernatural_genre = Genre.objects.get(id=4)
+        supernatural_novels = Novel.objects.filter(genres=supernatural_genre).distinct()
+    except Genre.DoesNotExist:
+        supernatural_genre = None
+        supernatural_novels = []
+
+    return render(request, '../templates/novels/novel_list.html', {
+        'supernatural_novels': supernatural_novels,
+        'genre': supernatural_genre,
+    })
+
+
 def novel_list(request):
-    novels = Novel.objects.all()
-    return render(request, '../templates/novels/novel_list.html', {'novels': novels})
+    all_novels = Novel.objects.all()  # hoặc truyện mới cập nhật
+
+    # Lấy thể loại Siêu nhiên (id=4)
+    try:
+        genre_supernatural = Genre.objects.get(id=4)
+        supernatural_novels = Novel.objects.filter(genres=genre_supernatural).distinct()
+    except Genre.DoesNotExist:
+        genre_supernatural = None
+        supernatural_novels = []
+
+    # Lấy thể loại Hành động (id=2)
+    try:
+        genre_action = Genre.objects.get(id=2)
+        action_novels = Novel.objects.filter(genres=genre_action).distinct()
+    except Genre.DoesNotExist:
+        genre_action = None
+        action_novels = []
+
+    # Lấy thể loại id=1 (ví dụ tên gì đó)
+    try:
+        genre_one = Genre.objects.get(id=1)
+        one_novels = Novel.objects.filter(genres=genre_one).distinct()
+    except Genre.DoesNotExist:
+        genre_one = None
+        one_novels = []
+
+    return render(request, 'novels/novel_list.html', {
+        'novels': all_novels,
+        'genre_supernatural': genre_supernatural,
+        'supernatural_novels': supernatural_novels,
+        'genre_action': genre_action,
+        'action_novels': action_novels,
+        'genre_one': genre_one,
+        'one_novels': one_novels,
+    })
+
+
 
 def novel_detail(request, novel_id):
     novel = get_object_or_404(Novel, pk=novel_id)
