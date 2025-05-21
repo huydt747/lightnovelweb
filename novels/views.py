@@ -1,7 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from .models import Novel, Chapter
-from comments.models import Comment
+from .models import Novel, Chapter, Genre
 from comments.forms import CommentForm
 
 def novel_list(request):
@@ -12,7 +10,6 @@ def novel_detail(request, novel_id):
     novel = get_object_or_404(Novel, pk=novel_id)
     comments = novel.comments.filter(parent__isnull=True).select_related('user').prefetch_related('replies')
 
-    # Lấy danh sách ID truyện đã lưu (nếu người dùng đã đăng nhập)
     saved_novel_ids = []
     if request.user.is_authenticated:
         saved_novel_ids = list(request.user.saved_novels.values_list('novel_id', flat=True))
@@ -57,4 +54,10 @@ def chapter_detail(request, novel_id, chapter_id):
         'next_chapter': next_chapter,
     })
 
-
+def genre_filter(request, genre_id):
+    genre = get_object_or_404(Genre, id=genre_id)
+    novels = Novel.objects.filter(genres=genre)
+    return render(request, 'novels/genre_filter.html', {
+        'genre': genre,
+        'novels': novels
+    })

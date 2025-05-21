@@ -27,6 +27,7 @@ lightnovel_project/
 
 ├── uploads/  
 
+├── users/  
 
 ├── templates/                     ← Template chung
 │   └── index.html
