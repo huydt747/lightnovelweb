@@ -1,25 +1,60 @@
 <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
-<nav class="bg-gray-900 text-white" x-data="{ open: false, userMenu: false }">
+<nav class="bg-gray-100 text-black shadow" x-data="{ open: false, categoryOpen: false, userMenu: false }">
     <div class="container mx-auto px-4 py-3 flex items-center justify-between">
         <!-- Logo -->
         <a href="{% url 'novels:novel_list' %}" class="text-xl font-semibold flex items-center gap-2">
-            📘 <span>LightNovel</span>
+            <img src="../../static/langhoatu.png" alt="" width="60">
+        <span>Lãng Hoa Tử</span>
         </a>
 
         <!-- Toggle Button (Mobile) -->
-        <button @click="open = !open" class="lg:hidden text-white focus:outline-none">
+        <button @click="open = !open" class="lg:hidden text-black focus:outline-none">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
                  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path x-show="!open" stroke-linecap="round" stroke-linejoin="round"
-                      d="M4 6h16M4 12h16M4 18h16"/>
-                <path x-show="open" stroke-linecap="round" stroke-linejoin="round"
-                      d="M6 18L18 6M6 6l12 12"/>
+                <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                <path x-show="open" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
             </svg>
         </button>
 
         <!-- Menu Items -->
-        <div class="flex items-center gap-4">
+        <div class="hidden lg:flex items-center gap-6">
+            <a href="#" class="font-semibold hover:underline">Sáng tác</a>
+
+            <!-- Thể loại + Dropdown -->
+            <div class="relative" x-data="{ categoryOpen: false }">
+                <button @click="categoryOpen = !categoryOpen" class="flex items-center gap-1 hover:text-blue-600 transition">
+                    Thể loại
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.23 8.29a.75.75 0 01.02-1.06z"
+                        clip-rule="evenodd" />
+                    </svg>
+                </button>
+                <div x-show="categoryOpen" @click.away="categoryOpen = false"
+                    class="absolute left-1/2 transform -translate-x-1/2 mt-2 w-screen max-w-4xl bg-white rounded shadow-lg z-50 py-3 px-6 grid grid-cols-4 gap-x-4 gap-y-2 transition">
+                    {% for genre in genres %}
+                    <a href="{% url 'novels:genre_filter' genre.id %}" class="py-1 hover:text-blue-600 whitespace-nowrap">{{ genre.name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <a href="#" class="font-semibold hover:underline">Xuất bản</a>
+            <a href="#" class="font-semibold hover:underline">Danh sách</a>
+            <a href="#" class="font-semibold hover:underline">Hướng dẫn</a>
+        </div>
+
+        <!-- Search + User -->
+<form action="{% url 'novels:search' %}" method="get" class="flex items-center gap-4">
+    <input type="text" name="q" placeholder="Tìm kiếm truyện..."
+           class="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+           minlength="2" required>
+    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700">
+        Tìm kiếm
+    </button>
+</form>
+
+
             <!-- Avatar & Dropdown -->
             <div class="relative" x-data="{ userMenu: false }">
                 <button @click="userMenu = !userMenu" class="focus:outline-none">
@@ -47,6 +82,7 @@
                      class="absolute right-0 mt-2 w-40 bg-white text-gray-800 rounded shadow-lg z-50 text-sm py-2">
                     {% if user.is_authenticated %}
                         <a href="{% url 'users:profile' %}" class="block px-4 py-2 hover:bg-gray-100">Hồ sơ</a>
+                        <a href="{% url 'my_uploads' %}" class="block px-4 py-2 hover:bg-gray-100">Đăng truyện</a>
                         <a href="{% url 'users:logout' %}" class="block px-4 py-2 hover:bg-gray-100">Đăng xuất</a>
                     {% else %}
                         <a href="{% url 'users:login' %}" class="block px-4 py-2 hover:bg-gray-100">Đăng nhập</a>
@@ -55,5 +91,30 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <div x-show="open" class="lg:hidden px-4 py-2 space-y-2 border-t border-gray-200">
+        <a href="#" class="block py-2 font-semibold">Sáng tác</a>
+        
+        <!-- Mobile Thể loại Dropdown -->
+        <div x-data="{ mobileCategoryOpen: false }">
+            <button @click="mobileCategoryOpen = !mobileCategoryOpen" class="flex justify-between items-center w-full py-2 font-semibold">
+                Thể loại
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path x-show="!mobileCategoryOpen" fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.23 8.29a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                    <path x-show="mobileCategoryOpen" fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 9.06l-3.71 3.71a.75.75 0 11-1.06-1.06l4.24-4.24a.75.75 0 011.06 0l4.24 4.24a.75.75 0 01-.02 1.06z" clip-rule="evenodd" />
+                </svg>
+            </button>
+            <div x-show="mobileCategoryOpen" class="pl-4 space-y-1 grid grid-cols-2 gap-1">
+                {% for genre in genres %}
+                    <a href="{% url 'novels:genre_filter' genre.id %}" class="block py-1 hover:underline">{{ genre.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <a href="#" class="block py-2 font-semibold">Xuất bản</a>
+        <a href="#" class="block py-2 font-semibold">Danh sách</a>
+        <a href="#" class="block py-2 font-semibold">Hướng dẫn</a>
     </div>
 </nav>

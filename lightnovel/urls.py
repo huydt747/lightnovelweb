@@ -3,6 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 from novels import views as novel_views
 
 urlpatterns = [
@@ -10,6 +11,8 @@ urlpatterns = [
     path('', novel_views.novel_list, name='home'),
     path('novels/', include('novels.urls')),
     path('users/', include(('users.urls', 'users'), namespace='users')),
+    path('uploads/', include('uploads.urls')),
+    path('original/', novel_views.original_novels, name='original'),
     # path('comments/', include('comments.urls')),
 ]
 

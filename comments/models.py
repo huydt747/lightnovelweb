@@ -10,7 +10,7 @@ class Comment(models.Model):
     novel = models.ForeignKey(Novel, on_delete=models.CASCADE, related_name='comments')
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-
+    
     # Trường cho reply
     parent = models.ForeignKey(
         'self',
@@ -20,5 +20,8 @@ class Comment(models.Model):
         related_name='replies'
     )
 
+    class Meta:
+        ordering = ['-created_at']
+        
     def __str__(self):
         return f'{self.user.username} - {self.novel.title}'

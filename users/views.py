@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout
 from .forms import RegisterForm, LoginForm
 from novels.models import Novel, SavedNovel
+from users.models import User
 from django.contrib.auth.decorators import login_required
 
 def register_view(request):
@@ -32,7 +33,16 @@ def logout_view(request):
 
 @login_required
 def profile_view(request):
-    return render(request, 'users/profile.html', {'user': request.user})
+    # Lấy truyện mà user hiện tại đã upload
+    uploaded_novels = Novel.objects.filter(uploaded_by=request.user)
+    uploaded_count = uploaded_novels.count()
+    
+    context = {
+        'user': request.user,
+        'uploaded_novels': uploaded_novels,
+        'uploaded_count': uploaded_count,
+    }
+    return render(request, 'users/profile.html', context)
 
 @login_required
 def toggle_save_novel(request, novel_id):
@@ -46,3 +56,16 @@ def toggle_save_novel(request, novel_id):
 def saved_novels(request):
     saved = request.user.saved_novels.select_related('novel')
     return render(request, 'users/saved.html', {'saved_novels': saved})
+
+def profile_detail_view(request, username):
+    user_profile = get_object_or_404(User, username=username)
+    # Lấy truyện mà user này đã upload
+    uploaded_novels = Novel.objects.filter(uploaded_by=user_profile)
+    uploaded_count = uploaded_novels.count()
+    
+    context = {
+        'user': user_profile,  # Đổi từ user_profile thành user để match với template
+        'uploaded_novels': uploaded_novels,
+        'uploaded_count': uploaded_count,
+    }
+    return render(request, 'users/profile.html', context)

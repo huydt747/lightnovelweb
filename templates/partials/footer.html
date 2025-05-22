@@ -1,5 +1,26 @@
-<footer class="bg-dark text-light text-center py-3 mt-4">
-    <div class="container">
-        <p>&copy; {{ year }} LightNovel Project. All rights reserved.</p>
-    </div>
+<footer style="background-color: #1a1a1a; color: #ffffff; padding: 20px; margin-top: 20px; font-size: 14px;">
+  <div style="text-align: center;">
+    <p>&copy; {{ year }} <span style="font-weight: bold;">Lãng Hoa Tử</span>. All rights reserved.</p>
+    
+    <nav style="margin-top: 10px;">
+      <a href="{% url 'novels:novel_list' %}" style="color: #ccc; text-decoration: none; margin: 0 15px; transition: color 0.3s;">
+        Sáng tác
+      </a>
+      <a href="{% url 'novels:genre_filter' 4 %}" style="color: #ccc; text-decoration: none; margin: 0 15px; transition: color 0.3s;">
+        Siêu nhiên
+      </a>
+      <a href="{% url 'novels:genre_filter' 2 %}" style="color: #ccc; text-decoration: none; margin: 0 15px; transition: color 0.3s;">
+        Hành động
+      </a>
+      <a href="{% url 'novels:genre_filter' 1 %}" style="color: #ccc; text-decoration: none; margin: 0 15px; transition: color 0.3s;">
+        Tình cảm
+      </a>
+      <a href="{% url 'novels:novel_list' %}" style="color: #ccc; text-decoration: none; margin: 0 15px; transition: color 0.3s;">
+        Danh sách truyện
+      </a>
+      <a href="https://f88.vn/" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: none; font-weight: bold; margin: 0 15px;">
+        Truy cập F88
+      </a>
+    </nav>
+  </div>
 </footer>
