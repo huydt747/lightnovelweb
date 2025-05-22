@@ -1,12 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.urls import reverse
 from django.http import HttpResponseForbidden
 
 from .forms import NovelUploadForm, ChapterUploadForm
 from .models import NovelUpload, ChapterUpload
-from novels.models import Novel, Chapter, Genre
+from novels.models import Novel, Chapter
 
 @login_required
 def upload_novel(request):
@@ -173,4 +172,24 @@ def edit_chapter(request, chapter_id):
         'form': form,
         'chapter': chapter_upload,
         'novel_upload': novel_upload
+    })
+
+def dashboard_view(request):
+    novel_uploads = NovelUpload.objects.filter(user=request.user).select_related('novel')
+    novels_with_data = []
+    
+    # Chuẩn bị dữ liệu cho template
+    for upload in novel_uploads:
+        if upload.novel:
+            novels_with_data.append({
+                'id': upload.novel.id,
+                'title': upload.title,
+                'cover_image': upload.cover_image,
+                'uploaded_at': upload.uploaded_at,
+                'chapter_count': upload.novel.chapter_set.count() if upload.novel else 0
+            })
+    
+    return render(request, 'users/profile.html', {
+        'uploaded_count': len(novels_with_data),
+        'novels': novels_with_data
     })

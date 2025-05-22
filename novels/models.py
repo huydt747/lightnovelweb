@@ -10,8 +10,8 @@ class Genre(models.Model):
 
 class Novel(models.Model):
     STATUS_CHOICES = [
-        ('ongoing', 'Ongoing'),
-        ('completed', 'Completed'),
+        ('ongoing', 'Đang tiến hành'),
+        ('completed', 'Hoàn thành'),
     ]
 
     title = models.CharField(max_length=255)
@@ -20,6 +20,7 @@ class Novel(models.Model):
     cover_image = models.ImageField(upload_to='uploads/covers/', blank=True, null=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='ongoing')
     genres = models.ManyToManyField(Genre, related_name='novels')
+    uploaded_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='uploaded_novels', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

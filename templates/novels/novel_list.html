@@ -6,9 +6,9 @@
     <!-- Header Section -->
     <header class="mb-12 text-center">
         <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">
-            Khám Phá Light Novels
+            Đọc Light Novel miễn phí
         </h1>
-        <p class="mt-2 text-lg text-gray-600">Hành trình vào thế giới truyện đầy sắc màu!</p>
+        <p class="mt-2 text-lg text-gray-600">Truyện chữ >>>> Truyện ảnh</p>
     </header>
 
     <!-- Light Novels Mới Cập Nhật Section -->
@@ -128,10 +128,6 @@
             <p class="text-gray-600 text-lg text-center col-span-full">🚫 Không có truyện nào thuộc thể loại {{ genre_one.name }}.</p>
         {% endif %}
     </div>
-    <p class="mt-6 text-center text-lg">
-        📌 <span class="text-blue-600 font-bold">Tổng số truyện {{ genre_one.name }}:</span> 
-        <span class="text-gray-900 font-extrabold">{{ one_novels|length }}</span>
-    </p>
 </section>
 
 
@@ -189,10 +185,6 @@
             <p class="text-gray-600 text-lg text-center col-span-full">🚫 Không có truyện nào thuộc thể loại {{ genre_action.name }}.</p>
         {% endif %}
     </div>
-    <p class="mt-6 text-center text-lg">
-        📌 <span class="text-blue-600 font-bold">Tổng số truyện {{ genre_action.name }}:</span> 
-        <span class="text-gray-900 font-extrabold">{{ action_novels|length }}</span>
-    </p>
 </section>
 
 
@@ -253,11 +245,6 @@
                 <p class="text-gray-600 text-lg text-center col-span-full">🚫 Không có truyện nào thuộc thể loại Siêu nhiên.</p>
             {% endif %}
         </div>
-        <!-- Tổng số truyện Siêu nhiên -->
-        <p class="mt-6 text-center text-lg">
-            📌 <span class="text-blue-600 font-bold">Tổng số truyện Siêu nhiên:</span> 
-            <span class="text-gray-900 font-extrabold">{{ supernatural_novels|length }}</span>
-        </p>
     </section>
 
 </div>
