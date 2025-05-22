@@ -110,3 +110,20 @@ def genre_filter(request, genre_id):
         'genre': genre,
         'novels': novels
     })
+    
+def original_novels(request):
+    tu_sang_tac = get_object_or_404(Genre, name="Tự sáng tác")
+    novels = Novel.objects.filter(genres=tu_sang_tac)
+    return render(request, 'novels/original.html', {
+        'novels': novels,
+        'genre': tu_sang_tac
+    })
+    
+def search_novels(request):
+    query = request.GET.get('q', '')
+    novels = Novel.objects.filter(title__icontains=query) if len(query) >= 2 else []
+
+    return render(request, 'novels/search_results.html', {
+        'query': query,
+        'novels': novels
+    })

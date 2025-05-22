@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h2 class="text-2xl font-bold mb-4">Kết quả tìm kiếm cho: "{{ query }}"</h2>
+
+    {% if novels %}
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+            {% for novel in novels %}
+                <div class="bg-white rounded-xl shadow p-4">
+                    <a href="{% url 'novels:novel_detail' novel.id %}">
+                        <img src="{% if novel.cover_image %}{{ novel.cover_image.url }}{% else %}/static/images/default.jpg{% endif %}"
+     alt="{{ novel.title }}"
+     class="w-full h-48 object-cover rounded mb-2">
+
+                        <h3 class="text-lg font-semibold">{{ novel.title }}</h3>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Không tìm thấy truyện nào.</p>
+    {% endif %}
+{% endblock %}

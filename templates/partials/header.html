@@ -45,10 +45,15 @@
         </div>
 
         <!-- Search + User -->
-        <div class="flex items-center gap-4">
-            <div class="bg-gray-300 rounded-full px-3 py-1 text-sm text-gray-600">
-                Tối thiểu 2 kí tự
-            </div>
+<form action="{% url 'novels:search' %}" method="get" class="flex items-center gap-4">
+    <input type="text" name="q" placeholder="Tìm kiếm truyện..."
+           class="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+           minlength="2" required>
+    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700">
+        Tìm kiếm
+    </button>
+</form>
+
 
             <!-- Avatar & Dropdown -->
             <div class="relative" x-data="{ userMenu: false }">
