@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseForbidden
-
 from .forms import NovelUploadForm, ChapterUploadForm
 from .models import NovelUpload, ChapterUpload
 from novels.models import Novel, Chapter
@@ -13,7 +12,13 @@ def upload_novel(request):
         form = NovelUploadForm(request.POST, request.FILES)
         if form.is_valid():
             # Lưu upload
-            novel_upload = form.save(user=request.user)
+            novel_upload = form.save(commit=False)
+            novel_upload.user = request.user
+            novel_upload.uploaded_by = request.user  # Cũng set uploaded_by
+            novel_upload.save()
+            
+            # Lưu many-to-many relationships nếu có
+            form.save_m2m()
             
             # Tạo novel từ upload
             novel = Novel.objects.create(
@@ -21,7 +26,8 @@ def upload_novel(request):
                 description=novel_upload.description,
                 author=novel_upload.author,
                 cover_image=novel_upload.cover_image,
-                status='ongoing'
+                status='ongoing',
+                uploaded_by=request.user  # Thêm uploaded_by cho Novel
             )
             
             # Liên kết novel với upload
@@ -172,24 +178,4 @@ def edit_chapter(request, chapter_id):
         'form': form,
         'chapter': chapter_upload,
         'novel_upload': novel_upload
-    })
-
-def dashboard_view(request):
-    novel_uploads = NovelUpload.objects.filter(user=request.user).select_related('novel')
-    novels_with_data = []
-    
-    # Chuẩn bị dữ liệu cho template
-    for upload in novel_uploads:
-        if upload.novel:
-            novels_with_data.append({
-                'id': upload.novel.id,
-                'title': upload.title,
-                'cover_image': upload.cover_image,
-                'uploaded_at': upload.uploaded_at,
-                'chapter_count': upload.novel.chapter_set.count() if upload.novel else 0
-            })
-    
-    return render(request, 'users/profile.html', {
-        'uploaded_count': len(novels_with_data),
-        'novels': novels_with_data
     })
