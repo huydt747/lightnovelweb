@@ -44,7 +44,7 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
-@login_required
+
 def profile_view(request, username):
     user_profile = get_object_or_404(User, username=username)
     uploaded_novels = Novel.objects.filter(uploaded_by=user_profile)
@@ -71,15 +71,15 @@ def saved_novels(request):
     saved = request.user.saved_novels.select_related('novel')
     return render(request, 'users/saved.html', {'saved_novels': saved})
 
-def profile_detail_view(request, username):
-    user_profile = get_object_or_404(User, username=username)
-    # Lấy truyện mà user này đã upload
-    uploaded_novels = Novel.objects.filter(uploaded_by=user_profile)
-    uploaded_count = uploaded_novels.count()
+# def profile_detail_view(request, username):
+#     user_profile = get_object_or_404(User, username=username)
+#     # Lấy truyện mà user này đã upload
+#     uploaded_novels = Novel.objects.filter(uploaded_by=user_profile)
+#     uploaded_count = uploaded_novels.count()
     
-    context = {
-        'user': user_profile,  # Đổi từ user_profile thành user để match với template
-        'uploaded_novels': uploaded_novels,
-        'uploaded_count': uploaded_count,
-    }
-    return render(request, 'users/profile.html', context)
+#     context = {
+#         'user': user_profile,  # Đổi từ user_profile thành user để match với template
+#         'uploaded_novels': uploaded_novels,
+#         'uploaded_count': uploaded_count,
+#     }
+#     return render(request, 'users/profile.html', context)

@@ -18,9 +18,6 @@ urlpatterns += i18n_patterns(
     path('novels/', include('novels.urls')),
     path('users/', include(('users.urls', 'users'), namespace='users')),
     path('uploads/', include('uploads.urls')),
-    path('original/', novel_views.original_novels, name='original'),
-    path('published/', novel_views.published_novels, name='published'),
-    path('guidelines/', novel_views.guidelines, name='guidelines'),
     prefix_default_language=True,
 )
 
