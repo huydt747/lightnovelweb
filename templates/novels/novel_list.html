@@ -1,26 +1,23 @@
 {% extends 'index.html' %}
+{% load i18n %}
 {% block title %}Trang chủ - Light Novels{% endblock %}
 
 {% block content %}
 <div class="container mx-auto px-4 py-8 max-w-7xl">
     <!-- Header Section -->
     <header class="mb-12 text-center">
-        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">
-            Đọc Light Novel miễn phí
-        </h1>
-        <p class="mt-2 text-lg text-gray-600">Truyện chữ >>>> Truyện ảnh</p>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">{% trans "Đọc Light Novel miễn phí" %}</h1>
+        <p class="mt-2 text-lg text-gray-600">{% trans "Truyện chữ" %} >>>>{% trans "Truyện ảnh" %}</p>
     </header>
 
     <!-- Light Novels Mới Cập Nhật Section -->
     <section class="mb-16">
         <div class="flex items-center justify-between mb-6">
-            <h2 class="text-3xl font-bold text-gray-800">Light Novels Mới Cập Nhật</h2>
+            <h2 class="text-3xl font-bold text-gray-800">{% trans "Light Novels Mới Cập Nhật" %}</h2>
             <span class="inline-flex items-center bg-blue-600 text-white text-sm font-medium px-3 py-1 rounded-full">
                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                Mới Nhất
-            </span>
+                </svg>{% trans "Mới Nhất" %}</span>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
             {% for novel in novels %}
@@ -32,7 +29,7 @@
                                      alt="{{ novel.title }}"
                                      class="h-64 w-full object-cover transition-transform duration-300 group-hover:scale-105">
                                 {% if novel.is_hot %}
-                                    <span class="absolute top-3 right-3 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">HOT</span>
+                                    <span class="absolute top-3 right-3 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">{% trans "HOT" %}</span>
                                 {% endif %}
                             </div>
                         </a>
@@ -65,11 +62,11 @@
                         </div>
                     </div>
                 {% else %}
-                    <div class="text-red-600 text-center">Dữ liệu truyện không hợp lệ</div>
+                    <div class="text-red-600 text-center">{% trans "Dữ liệu truyện không hợp lệ" %}</div>
                 {% endif %}
             {% endfor %}
             {% if not novels %}
-                <p class="text-gray-600 text-lg text-center col-span-full">🚫 Chưa có truyện nào được cập nhật.</p>
+                <p class="text-gray-600 text-lg text-center col-span-full">{% trans "🚫 Chưa có truyện nào được cập nhật." %}</p>
             {% endif %}
         </div>
     </section>
@@ -91,7 +88,7 @@
                                  alt="{{ novel.title }}"
                                  class="h-64 w-full object-cover transition-transform duration-300 group-hover:scale-105">
                             {% if novel.is_hot %}
-                                <span class="absolute top-3 right-3 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">HOT</span>
+                                <span class="absolute top-3 right-3 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">{% trans "HOT" %}</span>
                             {% endif %}
                         </div>
                     </a>
@@ -121,7 +118,7 @@
                     </div>
                 </div>
             {% else %}
-                <div class="text-red-600 text-center">Dữ liệu truyện không hợp lệ</div>
+                <div class="text-red-600 text-center">{% trans "Dữ liệu truyện không hợp lệ" %}</div>
             {% endif %}
         {% endfor %}
         {% if not one_novels %}
@@ -148,7 +145,7 @@
                                  alt="{{ novel.title }}"
                                  class="h-64 w-full object-cover transition-transform duration-300 group-hover:scale-105">
                             {% if novel.is_hot %}
-                                <span class="absolute top-3 right-3 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">HOT</span>
+                                <span class="absolute top-3 right-3 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">{% trans "HOT" %}</span>
                             {% endif %}
                         </div>
                     </a>
@@ -178,7 +175,7 @@
                     </div>
                 </div>
             {% else %}
-                <div class="text-red-600 text-center">Dữ liệu truyện không hợp lệ</div>
+                <div class="text-red-600 text-center">{% trans "Dữ liệu truyện không hợp lệ" %}</div>
             {% endif %}
         {% endfor %}
         {% if not action_novels %}
@@ -192,8 +189,8 @@
     <section class="mb-16">
         <div class="relative bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 mb-8 shadow-xl text-center text-white overflow-hidden">
             <div class="absolute inset-0 bg-[url('/static/images/supernatural-bg.jpg')] bg-cover bg-center opacity-20"></div>
-            <h2 class="relative text-3xl md:text-4xl font-extrabold tracking-tight">Thể Loại Siêu Nhiên</h2>
-            <p class="relative mt-2 text-lg text-white/80">Khám phá những câu chuyện huyền bí và đầy lôi cuốn!</p>
+            <h2 class="relative text-3xl md:text-4xl font-extrabold tracking-tight">{% trans "Thể Loại Siêu Nhiên" %}</h2>
+            <p class="relative mt-2 text-lg text-white/80">{% trans "Khám phá những câu chuyện huyền bí và đầy lôi cuốn!" %}</p>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
             {% for novel in supernatural_novels %}
@@ -205,7 +202,7 @@
                                      alt="{{ novel.title }}"
                                      class="h-64 w-full object-cover transition-transform duration-300 group-hover:scale-105">
                                 {% if novel.is_hot %}
-                                    <span class="absolute top-3 right-3 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">HOT</span>
+                                    <span class="absolute top-3 right-3 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">{% trans "HOT" %}</span>
                                 {% endif %}
                             </div>
                         </a>
@@ -238,11 +235,11 @@
                         </div>
                     </div>
                 {% else %}
-                    <div class="text-red-600 text-center">Dữ liệu truyện không hợp lệ</div>
+                    <div class="text-red-600 text-center">{% trans "Dữ liệu truyện không hợp lệ" %}</div>
                 {% endif %}
             {% endfor %}
             {% if not supernatural_novels %}
-                <p class="text-gray-600 text-lg text-center col-span-full">🚫 Không có truyện nào thuộc thể loại Siêu nhiên.</p>
+                <p class="text-gray-600 text-lg text-center col-span-full">{% trans "🚫 Không có truyện nào thuộc thể loại Siêu nhiên." %}</p>
             {% endif %}
         </div>
     </section>

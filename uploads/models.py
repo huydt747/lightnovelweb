@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from novels.models import Novel, Chapter, Genre
+from novels.models import Novel, Genre
 
 class NovelUpload(models.Model):
     STATUS_CHOICES = [
@@ -15,7 +15,7 @@ class NovelUpload(models.Model):
     description = models.TextField()
     author = models.CharField(max_length=255)
     cover_image = models.ImageField(upload_to='uploads/covers/', blank=True, null=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')  # Changed default to 'pending'
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     novel = models.ForeignKey(Novel, on_delete=models.SET_NULL, null=True, blank=True, related_name='uploads')
     uploaded_at = models.DateTimeField(auto_now_add=True)
     
@@ -23,7 +23,7 @@ class NovelUpload(models.Model):
         return f"{self.title} by {self.uploaded_by.username}"
     
     def get_genres(self):
-        return self.genre_selections.all()  # Fixed method to return actual genres
+        return self.genre_selections.all()
     
     def get_chapters(self):
         return self.chapters.all().order_by('chapter_number')

@@ -1,4 +1,5 @@
 {% extends "index.html" %}
+{% load i18n %}
 {% block content %}
 <div class="container mx-auto px-4 py-8 max-w-6xl">
     <!-- Banner thể loại -->
@@ -44,9 +45,7 @@
                                 </div>
                                 
                                 <!-- Nút đọc truyện -->
-                                <a href="{% url 'novels:novel_detail' novel.id %}" class="inline-flex items-center px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors duration-200">
-                                    Đọc ngay
-                                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <a href="{% url 'novels:novel_detail' novel.id %}" class="inline-flex items-center px-3 py-1 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors duration-200">{% trans "Đọc ngay" %}<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                     </svg>
                                 </a>
@@ -62,9 +61,9 @@
         <div class="flex justify-center mt-8">
             <nav class="inline-flex rounded-md shadow">
                 {% if page_obj.has_previous %}
-                    <a href="?page={{ page_obj.previous_page_number }}" class="py-2 px-4 bg-white border border-gray-300 text-gray-700 rounded-l-md hover:bg-gray-100">Trước</a>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="py-2 px-4 bg-white border border-gray-300 text-gray-700 rounded-l-md hover:bg-gray-100">{% trans "Trước" %}</a>
                 {% else %}
-                    <span class="py-2 px-4 bg-gray-100 border border-gray-300 text-gray-400 rounded-l-md cursor-not-allowed">Trước</span>
+                    <span class="py-2 px-4 bg-gray-100 border border-gray-300 text-gray-400 rounded-l-md cursor-not-allowed">{% trans "Trước" %}</span>
                 {% endif %}
                 
                 {% for i in page_obj.paginator.page_range %}
@@ -76,9 +75,9 @@
                 {% endfor %}
                 
                 {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}" class="py-2 px-4 bg-white border border-gray-300 text-gray-700 rounded-r-md hover:bg-gray-100">Sau</a>
+                    <a href="?page={{ page_obj.next_page_number }}" class="py-2 px-4 bg-white border border-gray-300 text-gray-700 rounded-r-md hover:bg-gray-100">{% trans "Sau" %}</a>
                 {% else %}
-                    <span class="py-2 px-4 bg-gray-100 border border-gray-300 text-gray-400 rounded-r-md cursor-not-allowed">Sau</span>
+                    <span class="py-2 px-4 bg-gray-100 border border-gray-300 text-gray-400 rounded-r-md cursor-not-allowed">{% trans "Sau" %}</span>
                 {% endif %}
             </nav>
         </div>

@@ -1,4 +1,5 @@
 {% extends "index.html" %} 
+{% load i18n %}
 {% block title %}Chỉnh sửa truyện - {{ novel_upload.title }}{% endblock %}
 
 {% block content %}
@@ -8,18 +9,14 @@
     <div class="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4 border-b border-gray-200">
       <div class="flex space-x-8">
         <a href="{% url 'upload_chapter' novel_upload_id=novel_upload.id %}" 
-           class="text-gray-600 hover:text-blue-700 transition-colors duration-200 font-medium py-2 px-3 rounded-lg hover:bg-white/70">
-          Thêm chương mới
-        </a>
+           class="text-gray-600 hover:text-blue-700 transition-colors duration-200 font-medium py-2 px-3 rounded-lg hover:bg-white/70">{% trans "Thêm chương mới" %}</a>
         <a href="#" 
-           class="text-blue-700 font-medium py-2 px-3 border-b-2 border-blue-600 bg-white/50 rounded-t-lg shadow-sm">
-          Chỉnh sửa thông tin
-        </a>
+           class="text-blue-700 font-medium py-2 px-3 border-b-2 border-blue-600 bg-white/50 rounded-t-lg shadow-sm">{% trans "Chỉnh sửa thông tin" %}</a>
       </div>
     </div>
 
     <div class="p-6 sm:p-8">
-      <h1 class="text-2xl font-bold mb-8 text-gray-800 border-l-4 border-blue-600 pl-3">Chỉnh sửa thông tin truyện</h1>
+      <h1 class="text-2xl font-bold mb-8 text-gray-800 border-l-4 border-blue-600 pl-3">{% trans "Chỉnh sửa thông tin truyện" %}</h1>
       
       <form method="post" enctype="multipart/form-data" class="space-y-8">
         {% csrf_token %}
@@ -35,9 +32,7 @@
           <div class="lg:col-span-2 space-y-6">
             <!-- Tiêu đề -->
             <div class="group">
-              <label for="{{ form.title.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1 group-focus-within:text-blue-700">
-                Tiêu đề truyện
-              </label>
+              <label for="{{ form.title.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1 group-focus-within:text-blue-700">{% trans "Tiêu đề truyện" %}</label>
               <input type="text" name="{{ form.title.name }}" id="{{ form.title.id_for_label }}" 
                      value="{{ form.title.value|default:'' }}" 
                      class="block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
@@ -48,9 +43,7 @@
             
             <!-- Tác giả -->
             <div class="group">
-              <label for="{{ form.author.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1 group-focus-within:text-blue-700">
-                Tác giả
-              </label>
+              <label for="{{ form.author.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1 group-focus-within:text-blue-700">{% trans "Tác giả" %}</label>
               <input type="text" name="{{ form.author.name }}" id="{{ form.author.id_for_label }}" 
                      value="{{ form.author.value|default:'' }}" 
                      class="block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
@@ -61,9 +54,7 @@
             
             <!-- Mô tả -->
             <div class="group">
-              <label for="{{ form.description.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1 group-focus-within:text-blue-700">
-                Mô tả
-              </label>
+              <label for="{{ form.description.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1 group-focus-within:text-blue-700">{% trans "Mô tả" %}</label>
               <textarea name="{{ form.description.name }}" id="{{ form.description.id_for_label }}" rows="8"
                        class="block w-full px-4 py-3 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">{{ form.description.value|default:'' }}</textarea>
               {% if form.description.errors %}
@@ -73,7 +64,7 @@
             
             <!-- Thể loại -->
             <div>
-              <span class="block text-sm font-medium text-gray-700 mb-3">Thể loại</span>
+              <span class="block text-sm font-medium text-gray-700 mb-3">{% trans "Thể loại" %}</span>
               <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
                 {% for choice in form.genres %}
                   <div class="flex items-start">
@@ -99,9 +90,7 @@
           <div class="lg:col-span-1">
             <div class="bg-gradient-to-b from-gray-50 to-blue-50 p-6 rounded-xl border border-gray-200 shadow-sm">
               <label for="{{ form.cover_image.id_for_label }}" 
-                     class="block text-sm font-semibold text-gray-700 mb-4">
-                Ảnh bìa
-              </label>
+                     class="block text-sm font-semibold text-gray-700 mb-4">{% trans "Ảnh bìa" %}</label>
               <div class="flex flex-col items-center">
                 {% if novel_upload.cover_image %}
                   <div class="w-full h-80 rounded-lg overflow-hidden bg-white mb-4 shadow-md border border-gray-200">
@@ -120,7 +109,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  <span id="file-name">Chọn hình ảnh</span>
+                  <span id="file-name">{% trans "Chọn hình ảnh" %}</span>
                   <input type="file" name="{{ form.cover_image.name }}" id="{{ form.cover_image.id_for_label }}" class="hidden">
                 </label>
                 {% if form.cover_image.errors %}
@@ -133,13 +122,9 @@
         
         <div class="flex justify-end space-x-4 pt-6 border-t border-gray-100">
           <a href="{% url 'my_uploads' %}" 
-             class="bg-white text-gray-700 hover:bg-gray-100 font-medium py-2.5 px-5 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition duration-200">
-            Hủy
-          </a>
+             class="bg-white text-gray-700 hover:bg-gray-100 font-medium py-2.5 px-5 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition duration-200">{% trans "Hủy" %}</a>
           <button type="submit" 
-                  class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-2.5 px-6 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200">
-            Lưu thay đổi
-          </button>
+                  class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-2.5 px-6 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200">{% trans "Lưu thay đổi" %}</button>
         </div>
       </form>
     </div>

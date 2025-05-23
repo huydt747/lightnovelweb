@@ -1,4 +1,5 @@
 {% extends "index.html" %} 
+{% load i18n %}
 {% block title %}Chỉnh sửa chương - {{ chapter.title }}{% endblock %}
 
 {% block content %}
@@ -19,9 +20,7 @@
                class="mt-4 sm:mt-0 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                Quay lại danh sách chương
-            </a>
+                </svg>{% trans "Quay lại danh sách chương" %}</a>
         </div>
     </div>
 
@@ -32,9 +31,7 @@
             <h2 class="text-xl font-bold text-gray-900 flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                </svg>
-                Chỉnh sửa chương
-            </h2>
+                </svg>{% trans "Chỉnh sửa chương" %}</h2>
         </div>
         
         <!-- Form content -->
@@ -61,7 +58,7 @@
                     <div class="md:col-span-3">
                         <!-- Tiêu đề -->
                         <div class="mb-6">
-                            <label for="{{ form.title.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Tiêu đề chương</label>
+                            <label for="{{ form.title.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Tiêu đề chương" %}</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
                                 <input type="text" name="{{ form.title.name }}" id="{{ form.title.id_for_label }}" value="{{ form.title.value|default:'' }}" 
                                     class="block w-full pr-12 border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -79,7 +76,7 @@
                         
                         <!-- Nội dung -->
                         <div>
-                            <label for="{{ form.content.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Nội dung</label>
+                            <label for="{{ form.content.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Nội dung" %}</label>
                             <div class="mt-1">
                                 <textarea name="{{ form.content.name }}" id="{{ form.content.id_for_label }}" rows="18"
                                     class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
@@ -94,7 +91,7 @@
                     <div class="md:col-span-1">
                         <!-- Chương số -->
                         <div class="mb-6">
-                            <label for="{{ form.chapter_number.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">Chương số</label>
+                            <label for="{{ form.chapter_number.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">{% trans "Chương số" %}</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <span class="text-gray-500 sm:text-sm">#</span>
@@ -115,9 +112,7 @@
                                     <h3 class="text-sm font-medium text-gray-900 flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        Thông tin
-                                    </h3>
+                                        </svg>{% trans "Thông tin" %}</h3>
                                 </div>
                                 <div class="p-4">
                                     <div class="flex items-center text-sm text-gray-700">
@@ -138,16 +133,12 @@
                            class="inline-flex justify-center items-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-200">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 -ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                            Hủy
-                        </a>
+                            </svg>{% trans "Hủy" %}</a>
                         <button type="submit" 
                             class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 -ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            Lưu thay đổi
-                        </button>
+                            </svg>{% trans "Lưu thay đổi" %}</button>
                     </div>
                 </div>
             </form>

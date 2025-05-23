@@ -118,7 +118,15 @@ def original_novels(request):
         'novels': novels,
         'genre': tu_sang_tac
     })
-    
+
+def published_novels(request):
+    da_xuat_ban = get_object_or_404(Genre, name="Đã xuất bản")
+    novels = Novel.objects.filter(genres=da_xuat_ban)
+    return render(request, 'novels/published.html', {
+        'novels': novels,
+        'genre': da_xuat_ban
+    })
+
 def search_novels(request):
     query = request.GET.get('q', '')
     novels = Novel.objects.filter(title__icontains=query) if len(query) >= 2 else []
@@ -127,3 +135,6 @@ def search_novels(request):
         'query': query,
         'novels': novels
     })
+    
+def guidelines(request):
+    return render(request, 'novels/guidelines.html')

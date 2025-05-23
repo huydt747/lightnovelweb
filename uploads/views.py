@@ -5,6 +5,7 @@ from django.http import HttpResponseForbidden
 from .forms import NovelUploadForm, ChapterUploadForm
 from .models import NovelUpload, ChapterUpload
 from novels.models import Novel, Chapter
+from django.utils.translation import gettext as _
 
 @login_required
 def upload_novel(request):
@@ -39,7 +40,7 @@ def upload_novel(request):
             for genre in genres:
                 novel.genres.add(genre)
             
-            messages.success(request, 'Truyện đã được tạo thành công!')
+            messages.success(request, _('Truyện đã được tạo thành công!'))
             return redirect('upload_chapter', novel_upload_id=novel_upload.id)
     else:
         form = NovelUploadForm()
@@ -52,7 +53,7 @@ def upload_chapter(request, novel_upload_id):
     
     # Kiểm tra quyền truy cập
     if novel_upload.user != request.user:
-        return HttpResponseForbidden("Bạn không có quyền thêm chương cho truyện này.")
+        return HttpResponseForbidden(_("Bạn không có quyền thêm chương cho truyện này."))
     
     if request.method == 'POST':
         form = ChapterUploadForm(request.POST)
@@ -70,7 +71,7 @@ def upload_chapter(request, novel_upload_id):
                     chapter_number=chapter_upload.chapter_number
                 )
             
-            messages.success(request, 'Chương mới đã được tạo thành công!')
+            messages.success(request, _('Chương mới đã được tạo thành công!'))
             
             # Xác định hành động tiếp theo
             if 'save_and_add' in request.POST:
@@ -101,7 +102,7 @@ def edit_novel_upload(request, novel_upload_id):
     
     # Kiểm tra quyền truy cập
     if novel_upload.user != request.user:
-        return HttpResponseForbidden("Bạn không có quyền chỉnh sửa truyện này.")
+        return HttpResponseForbidden(_("Bạn không có quyền chỉnh sửa truyện này."))
     
     if request.method == 'POST':
         form = NovelUploadForm(request.POST, request.FILES, instance=novel_upload)
@@ -124,7 +125,7 @@ def edit_novel_upload(request, novel_upload_id):
                 for genre in genres:
                     novel.genres.add(genre)
             
-            messages.success(request, 'Thông tin truyện đã được cập nhật!')
+            messages.success(request, _('Thông tin truyện đã được cập nhật!'))
             return redirect('my_uploads')
     else:
         # Lấy thể loại hiện tại
@@ -143,7 +144,7 @@ def edit_chapter(request, chapter_id):
     
     # Kiểm tra quyền truy cập
     if novel_upload.user != request.user:
-        return HttpResponseForbidden("Bạn không có quyền chỉnh sửa chương này.")
+        return HttpResponseForbidden(_("Bạn không có quyền chỉnh sửa chương này."))
     
     if request.method == 'POST':
         form = ChapterUploadForm(request.POST, instance=chapter_upload)
@@ -169,7 +170,7 @@ def edit_chapter(request, chapter_id):
                         chapter_number=chapter_upload.chapter_number
                     )
             
-            messages.success(request, 'Chương đã được cập nhật!')
+            messages.success(request, _('Chương đã được cập nhật!'))
             return redirect('upload_chapter', novel_upload_id=novel_upload.id)
     else:
         form = ChapterUploadForm(instance=chapter_upload)
