@@ -1,4 +1,5 @@
 {% extends 'index.html' %}
+{% load i18n %}
 
 {% block content %}
 <div class="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto">
@@ -9,8 +10,8 @@
   <div class="mb-6">
     <h2 class="text-xl font-semibold text-gray-700 mb-2">{% trans "Bước 1: Đăng nhập tài khoản" %}</h2>
     <ul class="list-disc list-inside text-gray-600">
-      <li>{% trans "Truy cập trang" %}<a href="/login/" class="text-blue-600 hover:underline">{% trans "Đăng nhập" %}</a></li>
-      <li>{% trans "Nếu chưa có tài khoản, bạn có thể" %}<a href="/register/" class="text-blue-600 hover:underline">{% trans "đăng ký tại đây" %}</a></li>
+      <li>{% trans "Truy cập trang " %}<a href="/login/" class="text-blue-600 hover:underline">{% trans "Đăng nhập" %}</a></li>
+      <li>{% trans "Nếu chưa có tài khoản, bạn có thể " %}<a href="/register/" class="text-blue-600 hover:underline">{% trans "đăng ký tại đây" %}</a></li>
     </ul>
   </div>
 
