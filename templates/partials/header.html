@@ -56,40 +56,16 @@
                     {% trans "Tìm kiếm" %}
                 </button>
             </form>
+            
+            <form action="{% url 'set_language' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <select name="language" onchange="this.form.submit()" class="border rounded px-2 py-1 text-sm">
+                    <option value="vi" {% if LANGUAGE_CODE == 'vi' %}selected{% endif %}>Tiếng Việt</option>
+                    <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
+                </select>
+            </form>
 
-            <!-- Language Switcher -->
-            <div class="relative" x-data="{ languageMenu: false }">
-                <button @click="languageMenu = !languageMenu" class="flex items-center gap-1 px-3 py-2 rounded hover:bg-gray-200 transition">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
-                    </svg>
-                    <span class="text-sm font-medium">
-                        {% get_current_language as LANGUAGE_CODE %}
-                        {% if LANGUAGE_CODE == 'vi' %}VI
-                        {% elif LANGUAGE_CODE == 'en' %}EN
-                        {% elif LANGUAGE_CODE == 'zh-hans' %}简
-                        {% elif LANGUAGE_CODE == 'zh-hant' %}繁
-                        {% endif %}
-                    </span>
-                </button>
-                
-                <div x-show="languageMenu" @click.away="languageMenu = false"
-                     class="absolute right-0 mt-2 w-40 bg-white rounded shadow-lg z-50 py-2">
-                    {% get_available_languages as languages %}
-                    {% for lang_code, lang_name in languages %}
-                        <form method="post" action="{% url 'set_language' %}" class="inline-block w-full">
-                            {% csrf_token %}
-                            <input name="next" type="hidden" value="{{ request.get_full_path }}">
-                            <input name="language" type="hidden" value="{{ lang_code }}">
-                            <button type="submit" class="w-full text-left px-4 py-2 hover:bg-gray-100 
-                                {% get_current_language as LANGUAGE_CODE %}
-                                {% if LANGUAGE_CODE == lang_code %}bg-blue-50 text-blue-600{% endif %}">
-                                {{ lang_name }}
-                            </button>
-                        </form>
-                    {% endfor %}
-                </div>
-            </div>
 
             <!-- Avatar & Dropdown -->
             <div class="relative" x-data="{ userMenu: false }">
@@ -155,23 +131,5 @@
         <a href="#" class="block py-2 font-semibold">{% trans "Xuất bản" %}</a>
         <a href="#" class="block py-2 font-semibold">{% trans "Danh sách" %}</a>
         <a href="#" class="block py-2 font-semibold">{% trans "Hướng dẫn" %}</a>
-
-        <!-- Mobile Language Switcher -->
-        <div class="border-t pt-2">
-            <div class="font-semibold mb-2">{% trans "Ngôn ngữ" %}</div>
-            {% get_available_languages as languages %}
-            {% for lang_code, lang_name in languages %}
-                <form method="post" action="{% url 'set_language' %}" class="inline-block">
-                    {% csrf_token %}
-                    <input name="next" type="hidden" value="{{ request.get_full_path }}">
-                    <input name="language" type="hidden" value="{{ lang_code }}">
-                    <button type="submit" class="block w-full text-left py-1 px-2 hover:bg-gray-100 rounded
-                        {% get_current_language as LANGUAGE_CODE %}
-                        {% if LANGUAGE_CODE == lang_code %}bg-blue-50 text-blue-600{% endif %}">
-                        {{ lang_name }}
-                    </button>
-                </form>
-            {% endfor %}
-        </div>
     </div>
 </nav>

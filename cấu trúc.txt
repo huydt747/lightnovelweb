@@ -53,4 +53,3 @@ lightnovel_project/
 
 ├── media/                         ← Ảnh bìa truyện, uploads
 │   └── covers/
-
