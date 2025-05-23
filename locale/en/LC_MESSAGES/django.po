@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-23 09:12+0700\n"
+"POT-Creation-Date: 2025-05-23 10:15+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: .\comments\models.py:10 .\novels\models.py:44
 msgid "User"
 msgstr ""
@@ -103,6 +104,555 @@ msgstr ""
 
 #: .\novels\models.py:52
 msgid "saved"
+msgstr ""
+
+#: .\templates\comments\comment_section.html:3
+#: .\templates\users\profile.html:98
+msgid "Bình luận"
+msgstr ""
+
+#: .\templates\comments\comment_section.html:27
+msgid "Gửi bình luận"
+msgstr ""
+
+#: .\templates\comments\comment_section.html:39
+msgid "Vui lòng"
+msgstr ""
+
+#: .\templates\comments\comment_section.html:39
+msgid "đăng nhập"
+msgstr ""
+
+#: .\templates\comments\comment_section.html:39
+msgid "hoặc"
+msgstr ""
+
+#: .\templates\comments\comment_section.html:39
+msgid "đăng ký"
+msgstr ""
+
+#: .\templates\comments\comment_section.html:39
+msgid "để bình luận"
+msgstr ""
+
+#: .\templates\comments\comment_section.html:64
+#: .\templates\comments\comment_section.html:137
+msgid "Admin"
+msgstr ""
+
+#: .\templates\comments\comment_section.html:87
+#: .\templates\comments\comment_section.html:93
+msgid "Trả lời"
+msgstr ""
+
+#: .\templates\comments\comment_section.html:110
+#: .\templates\uploads\edit_chapter.html:136
+#: .\templates\uploads\edit_novel.html:125
+msgid "Hủy"
+msgstr ""
+
+#: .\templates\comments\comment_section.html:112
+msgid "Gửi trả lời"
+msgstr ""
+
+#: .\templates\comments\comment_section.html:164
+msgid "Chưa có bình luận nào"
+msgstr ""
+
+#: .\templates\comments\comment_section.html:165
+msgid "Hãy là người đầu tiên bình luận!"
+msgstr ""
+
+#: .\templates\novels\chapter_detail.html:37
+#: .\templates\novels\chapter_detail.html:39
+msgid "&larr;"
+msgstr ""
+
+#: .\templates\novels\chapter_detail.html:53
+#: .\templates\novels\chapter_detail.html:55
+msgid "&rarr;"
+msgstr ""
+
+#: .\templates\novels\genre_filter.html:48
+msgid "Đọc ngay"
+msgstr ""
+
+#: .\templates\novels\genre_filter.html:64
+#: .\templates\novels\genre_filter.html:66
+msgid "Trước"
+msgstr ""
+
+#: .\templates\novels\genre_filter.html:78
+#: .\templates\novels\genre_filter.html:80
+msgid "Sau"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:5
+msgid "Hướng Dẫn Đăng Truyện"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:7
+msgid ""
+"Chào mừng bạn đến với nền tảng chia sẻ truyện! Vui lòng làm theo các bước "
+"sau để đăng truyện của bạn:"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:10
+msgid "Bước 1: Đăng nhập tài khoản"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:12
+msgid "Truy cập trang"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:12 .\templates\partials\header.html:85
+msgid "Đăng nhập"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:13
+msgid "Nếu chưa có tài khoản, bạn có thể"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:13
+msgid "đăng ký tại đây"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:18
+msgid "Bước 2: Truy cập mục \\"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:20
+msgid "\\"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:21
+msgid "Chọn \\"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:26
+msgid "Bước 3: Nhập thông tin truyện"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:28 .\templates\uploads\edit_novel.html:35
+msgid "Tiêu đề truyện"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:29 .\templates\uploads\edit_novel.html:46
+#: .\templates\uploads\upload_novel.html:48
+msgid "Tác giả"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:30
+msgid "Thể loại (có thể chọn nhiều)"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:31
+msgid "Ảnh bìa (nếu có)"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:32
+msgid "Tóm tắt nội dung"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:37
+msgid "Bước 4: Đăng chương truyện"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:39
+msgid "Vào phần \\"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:40
+msgid "Thêm chương mới, điền tiêu đề và nội dung chương"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:45
+msgid "Lưu ý:"
+msgstr ""
+
+#: .\templates\novels\guidelines.html:45
+msgid "Truyện sẽ được kiểm duyệt trước khi hiển thị công khai."
+msgstr ""
+
+#: .\templates\novels\novel_detail.html:12
+msgid "Người đăng:"
+msgstr ""
+
+#: .\templates\novels\novel_detail.html:19
+msgid "Thể loại:"
+msgstr ""
+
+#: .\templates\novels\novel_detail.html:25
+msgid "Chưa có thể loại"
+msgstr ""
+
+#: .\templates\novels\novel_detail.html:29
+msgid "Mô tả:"
+msgstr ""
+
+#: .\templates\novels\novel_detail.html:47
+msgid "Đã lưu"
+msgstr ""
+
+#: .\templates\novels\novel_detail.html:54
+msgid "Lưu truyện"
+msgstr ""
+
+#: .\templates\novels\novel_detail.html:61
+msgid "Danh sách chương"
+msgstr ""
+
+#: .\templates\novels\novel_list.html:9
+msgid "Đọc Light Novel miễn phí"
+msgstr ""
+
+#: .\templates\novels\novel_list.html:10
+msgid "Truyện ảnh"
+msgstr ""
+
+#: .\templates\novels\novel_list.html:16
+msgid "Light Novels Mới Cập Nhật"
+msgstr ""
+
+#: .\templates\novels\novel_list.html:20
+msgid "Mới Nhất"
+msgstr ""
+
+#: .\templates\novels\novel_list.html:32 .\templates\novels\novel_list.html:91
+#: .\templates\novels\novel_list.html:148
+#: .\templates\novels\novel_list.html:205 .\templates\novels\original.html:23
+#: .\templates\novels\published.html:22
+msgid "HOT"
+msgstr ""
+
+#: .\templates\novels\novel_list.html:65 .\templates\novels\novel_list.html:121
+#: .\templates\novels\novel_list.html:178
+#: .\templates\novels\novel_list.html:238
+msgid "Dữ liệu truyện không hợp lệ"
+msgstr ""
+
+#: .\templates\novels\novel_list.html:69
+msgid "🚫 Chưa có truyện nào được cập nhật."
+msgstr ""
+
+#: .\templates\novels\novel_list.html:192
+msgid "Thể Loại Siêu Nhiên"
+msgstr ""
+
+#: .\templates\novels\novel_list.html:193
+msgid "Khám phá những câu chuyện huyền bí và đầy lôi cuốn!"
+msgstr ""
+
+#: .\templates\novels\novel_list.html:242
+msgid "🚫 Không có truyện nào thuộc thể loại Siêu nhiên."
+msgstr ""
+
+#: .\templates\novels\original.html:9
+msgid "Thể Loại Tự Sáng Tác"
+msgstr ""
+
+#: .\templates\novels\original.html:10
+msgid "Khám phá những câu chuyện do chính người dùng tạo ra!"
+msgstr ""
+
+#: .\templates\novels\original.html:43 .\templates\novels\published.html:42
+msgid "Không có truyện nào thuộc thể loại \\"
+msgstr ""
+
+#: .\templates\novels\published.html:8
+msgid "Đã xuất bản"
+msgstr ""
+
+#: .\templates\novels\published.html:9
+msgid "Khám phá những câu chuyện đã được xuất bản tại Việt Nam!"
+msgstr ""
+
+#: .\templates\novels\search_results.html:22
+msgid "Không tìm thấy truyện nào."
+msgstr ""
+
+#: .\templates\partials\footer.html:4 .\templates\partials\header.html:9
+msgid "Lãng Hoa Tử"
+msgstr ""
+
+#: .\templates\partials\footer.html:4
+msgid ". All rights reserved."
+msgstr ""
+
+#: .\templates\partials\footer.html:7 .\templates\partials\header.html:23
+#: .\templates\partials\header.html:95
+msgid "Sáng tác"
+msgstr ""
+
+#: .\templates\partials\footer.html:8
+msgid "Siêu nhiên"
+msgstr ""
+
+#: .\templates\partials\footer.html:9
+msgid "Hành động"
+msgstr ""
+
+#: .\templates\partials\footer.html:10
+msgid "Tình cảm"
+msgstr ""
+
+#: .\templates\partials\footer.html:11
+msgid "Danh sách truyện"
+msgstr ""
+
+#: .\templates\partials\footer.html:12
+msgid "Truy cập F88"
+msgstr ""
+
+#: .\templates\partials\header.html:27 .\templates\partials\header.html:99
+#: .\templates\uploads\edit_novel.html:67
+#: .\templates\uploads\upload_novel.html:103
+msgid "Thể loại"
+msgstr ""
+
+#: .\templates\partials\header.html:41 .\templates\partials\header.html:111
+msgid "Xuất bản"
+msgstr ""
+
+#: .\templates\partials\header.html:42 .\templates\partials\header.html:112
+msgid "Danh sách"
+msgstr ""
+
+#: .\templates\partials\header.html:43 .\templates\partials\header.html:113
+msgid "Hướng dẫn"
+msgstr ""
+
+#: .\templates\partials\header.html:51
+msgid "Tìm kiếm"
+msgstr ""
+
+#: .\templates\partials\header.html:81
+msgid "Hồ sơ"
+msgstr ""
+
+#: .\templates\partials\header.html:82
+msgid "Đăng truyện"
+msgstr ""
+
+#: .\templates\partials\header.html:83
+msgid "Đăng xuất"
+msgstr ""
+
+#: .\templates\partials\header.html:86
+msgid "Đăng ký"
+msgstr ""
+
+#: .\templates\uploads\edit_chapter.html:23
+msgid "Quay lại danh sách chương"
+msgstr ""
+
+#: .\templates\uploads\edit_chapter.html:34
+msgid "Chỉnh sửa chương"
+msgstr ""
+
+#: .\templates\uploads\edit_chapter.html:61
+#: .\templates\uploads\upload_chapter.html:58
+msgid "Tiêu đề chương"
+msgstr ""
+
+#: .\templates\uploads\edit_chapter.html:79
+#: .\templates\uploads\upload_chapter.html:69
+msgid "Nội dung"
+msgstr ""
+
+#: .\templates\uploads\edit_chapter.html:94
+#: .\templates\uploads\upload_chapter.html:84
+msgid "Chương số"
+msgstr ""
+
+#: .\templates\uploads\edit_chapter.html:115
+msgid "Thông tin"
+msgstr ""
+
+#: .\templates\uploads\edit_chapter.html:141
+#: .\templates\uploads\edit_novel.html:127
+msgid "Lưu thay đổi"
+msgstr ""
+
+#: .\templates\uploads\edit_novel.html:12
+#: .\templates\uploads\upload_chapter.html:25
+msgid "Thêm chương mới"
+msgstr ""
+
+#: .\templates\uploads\edit_novel.html:14
+#: .\templates\uploads\upload_chapter.html:30
+msgid "Chỉnh sửa thông tin"
+msgstr ""
+
+#: .\templates\uploads\edit_novel.html:19
+msgid "Chỉnh sửa thông tin truyện"
+msgstr ""
+
+#: .\templates\uploads\edit_novel.html:57
+#: .\templates\uploads\upload_novel.html:65
+msgid "Mô tả"
+msgstr ""
+
+#: .\templates\uploads\edit_novel.html:93
+#: .\templates\uploads\upload_novel.html:81
+msgid "Ảnh bìa"
+msgstr ""
+
+#: .\templates\uploads\edit_novel.html:112
+msgid "Chọn hình ảnh"
+msgstr ""
+
+#: .\templates\uploads\my_uploads.html:8
+msgid "Truyện của tôi"
+msgstr ""
+
+#: .\templates\uploads\my_uploads.html:9
+#: .\templates\uploads\my_uploads.html:100
+msgid "Tạo truyện mới"
+msgstr ""
+
+#: .\templates\uploads\my_uploads.html:19
+msgid "Truyện"
+msgstr ""
+
+#: .\templates\uploads\my_uploads.html:20
+msgid "Chương"
+msgstr ""
+
+#: .\templates\uploads\my_uploads.html:21
+msgid "Đăng ngày"
+msgstr ""
+
+#: .\templates\uploads\my_uploads.html:22
+msgid "Thao tác"
+msgstr ""
+
+#: .\templates\uploads\my_uploads.html:70
+msgid "Thêm chương"
+msgstr ""
+
+#: .\templates\uploads\my_uploads.html:76
+msgid "Chỉnh sửa"
+msgstr ""
+
+#: .\templates\uploads\my_uploads.html:95
+msgid "Chưa có truyện nào"
+msgstr ""
+
+#: .\templates\uploads\my_uploads.html:96
+msgid "Bắt đầu hành trình sáng tác bằng việc tạo truyện đầu tiên của bạn."
+msgstr ""
+
+#: .\templates\uploads\my_uploads.html:111
+msgid "Previous"
+msgstr ""
+
+#: .\templates\uploads\my_uploads.html:132
+msgid "Next"
+msgstr ""
+
+#: .\templates\uploads\upload_chapter.html:103
+msgid "Các chương đã thêm"
+msgstr ""
+
+#: .\templates\uploads\upload_chapter.html:121
+msgid "Chưa có chương nào"
+msgstr ""
+
+#: .\templates\uploads\upload_chapter.html:134
+msgid "Lưu và thêm chương mới"
+msgstr ""
+
+#: .\templates\uploads\upload_chapter.html:139
+msgid "Lưu và hoàn thành"
+msgstr ""
+
+#: .\templates\uploads\upload_novel.html:7
+msgid "Tải lên truyện mới"
+msgstr ""
+
+#: .\templates\uploads\upload_novel.html:8
+msgid "Chia sẻ tác phẩm của bạn với hàng ngàn độc giả"
+msgstr ""
+
+#: .\templates\uploads\upload_novel.html:33
+msgid "Tiêu đề"
+msgstr ""
+
+#: .\templates\uploads\upload_novel.html:59
+msgid "Nhập tên tác giả hoặc bút danh"
+msgstr ""
+
+#: .\templates\uploads\upload_novel.html:75
+msgid "Giới thiệu hấp dẫn sẽ thu hút nhiều độc giả hơn"
+msgstr ""
+
+#: .\templates\uploads\upload_novel.html:89
+msgid "Chọn ảnh"
+msgstr ""
+
+#: .\templates\uploads\upload_novel.html:90
+msgid "hoặc kéo và thả"
+msgstr ""
+
+#: .\templates\uploads\upload_novel.html:92
+msgid "PNG, JPG, JPEG (tối đa 5MB)"
+msgstr ""
+
+#: .\templates\uploads\upload_novel.html:124
+msgid "Đăng tải truyện"
+msgstr ""
+
+#: .\templates\users\profile.html:13
+msgid "Thay ảnh bìa"
+msgstr ""
+
+#: .\templates\users\profile.html:48
+msgid "Chỉnh sửa hồ sơ"
+msgstr ""
+
+#: .\templates\users\profile.html:59
+msgid "Giới thiệu"
+msgstr ""
+
+#: .\templates\users\profile.html:64
+msgid "Chưa có thông tin giới thiệu..."
+msgstr ""
+
+#: .\templates\users\profile.html:80 .\templates\users\profile.html:139
+msgid "Truyện đã đăng"
+msgstr ""
+
+#: .\templates\users\profile.html:120 .\templates\users\saved.html:6
+msgid "Truyện đã lưu"
+msgstr ""
+
+#: .\templates\users\profile.html:126
+msgid "truyện"
+msgstr ""
+
+#: .\templates\users\profile.html:142
+msgid "Đăng truyện mới"
+msgstr ""
+
+#: .\templates\users\profile.html:217
+msgid "Xem truyện"
+msgstr ""
+
+#: .\templates\users\profile.html:255
+msgid "Đăng truyện đầu tiên"
+msgstr ""
+
+#: .\templates\users\saved.html:47
+msgid "Bạn chưa lưu truyện nào"
+msgstr ""
+
+#: .\templates\users\saved.html:48
+msgid "Hãy lưu những truyện bạn yêu thích để đọc sau!"
+msgstr ""
+
+#: .\templates\users\saved.html:52
+msgid "Khám phá truyện mới"
 msgstr ""
 
 #: .\uploads\views.py:43

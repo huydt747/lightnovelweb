@@ -2,41 +2,47 @@
 
 {% block content %}
 <div class="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto">
-<h1 class="text-3xl font-bold mb-4 text-blue-800">{% trans "Hướng Dẫn Đăng Truyện" %}</h1>
-<p class="mb-4">{% trans "Chào mừng bạn đến với nền tảng chia sẻ truyện! Vui lòng làm theo các bước sau để đăng truyện của bạn:" %}</p>
-<div class="mb-6">
-<h2 class="text-xl font-semibold text-gray-700 mb-2">{% trans "Bước 1: Đăng nhập tài khoản" %}</h2>
-<ul class="list-disc list-inside text-gray-600">
-<li>{% trans "Truy cập trang" %}<a class="text-blue-600 hover:underline" href="/login/">{% trans "Đăng nhập" %}</a></li>
-<li>{% trans "Nếu chưa có tài khoản, bạn có thể" %}<a class="text-blue-600 hover:underline" href="/register/">{% trans "đăng ký tại đây" %}</a></li>
-</ul>
-</div>
-<div class="mb-6">
-<h2 class="text-xl font-semibold text-gray-700 mb-2">{% trans "Bước 2: Truy cập mục "Đăng truyện"" %}</h2>
-<ul class="list-disc list-inside text-gray-600">
-<li>{% trans "Click vào tên tài khoản &gt; "Quản lý truyện"" %}</li>
-<li>{% trans "Chọn "Thêm truyện mới"" %}</li>
-</ul>
-</div>
-<div class="mb-6">
-<h2 class="text-xl font-semibold text-gray-700 mb-2">{% trans "Bước 3: Nhập thông tin truyện" %}</h2>
-<ul class="list-disc list-inside text-gray-600">
-<li>{% trans "Tiêu đề truyện" %}</li>
-<li>{% trans "Tác giả" %}</li>
-<li>{% trans "Thể loại (có thể chọn nhiều)" %}</li>
-<li>{% trans "Ảnh bìa (nếu có)" %}</li>
-<li>{% trans "Tóm tắt nội dung" %}</li>
-</ul>
-</div>
-<div class="mb-6">
-<h2 class="text-xl font-semibold text-gray-700 mb-2">{% trans "Bước 4: Đăng chương truyện" %}</h2>
-<ul class="list-disc list-inside text-gray-600">
-<li>{% trans "Vào phần "Quản lý chương"" %}</li>
-<li>{% trans "Thêm chương mới, điền tiêu đề và nội dung chương" %}</li>
-</ul>
-</div>
-<div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded-lg">
-<p><strong>{% trans "Lưu ý:" %}</strong>{% trans "Truyện sẽ được kiểm duyệt trước khi hiển thị công khai." %}</p>
-</div>
+  <h1 class="text-3xl font-bold mb-4 text-blue-800">{% trans "Hướng Dẫn Đăng Truyện" %}</h1>
+
+  <p class="mb-4">{% trans "Chào mừng bạn đến với nền tảng chia sẻ truyện! Vui lòng làm theo các bước sau để đăng truyện của bạn:" %}</p>
+
+  <div class="mb-6">
+    <h2 class="text-xl font-semibold text-gray-700 mb-2">{% trans "Bước 1: Đăng nhập tài khoản" %}</h2>
+    <ul class="list-disc list-inside text-gray-600">
+      <li>{% trans "Truy cập trang" %}<a href="/login/" class="text-blue-600 hover:underline">{% trans "Đăng nhập" %}</a></li>
+      <li>{% trans "Nếu chưa có tài khoản, bạn có thể" %}<a href="/register/" class="text-blue-600 hover:underline">{% trans "đăng ký tại đây" %}</a></li>
+    </ul>
+  </div>
+
+  <div class="mb-6">
+    <h2 class="text-xl font-semibold text-gray-700 mb-2">{% trans "Bước 2: Truy cập mục \"Đăng truyện\"" %}</h2>
+    <ul class="list-disc list-inside text-gray-600">
+      <li>Click vào tên tài khoản >{% trans "\"Quản lý truyện\"" %}</li>
+      <li>{% trans "Chọn \"Thêm truyện mới\"" %}</li>
+    </ul>
+  </div>
+
+  <div class="mb-6">
+    <h2 class="text-xl font-semibold text-gray-700 mb-2">{% trans "Bước 3: Nhập thông tin truyện" %}</h2>
+    <ul class="list-disc list-inside text-gray-600">
+      <li>{% trans "Tiêu đề truyện" %}</li>
+      <li>{% trans "Tác giả" %}</li>
+      <li>{% trans "Thể loại (có thể chọn nhiều)" %}</li>
+      <li>{% trans "Ảnh bìa (nếu có)" %}</li>
+      <li>{% trans "Tóm tắt nội dung" %}</li>
+    </ul>
+  </div>
+
+  <div class="mb-6">
+    <h2 class="text-xl font-semibold text-gray-700 mb-2">{% trans "Bước 4: Đăng chương truyện" %}</h2>
+    <ul class="list-disc list-inside text-gray-600">
+      <li>{% trans "Vào phần \"Quản lý chương\"" %}</li>
+      <li>{% trans "Thêm chương mới, điền tiêu đề và nội dung chương" %}</li>
+    </ul>
+  </div>
+
+  <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded-lg">
+    <p><strong>{% trans "Lưu ý:" %}</strong>{% trans "Truyện sẽ được kiểm duyệt trước khi hiển thị công khai." %}</p>
+  </div>
 </div>
 {% endblock %}

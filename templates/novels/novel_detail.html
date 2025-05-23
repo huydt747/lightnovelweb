@@ -2,21 +2,21 @@
 {% load i18n %}
 {% block content %}
 <div class="flex gap-4 mb-5 rounded-lg">
-<div class="w-1/4 bg-blue-200 rounded-lg overflow-hidden">
-<img alt="Ảnh bìa {{ novel.title }}" class="w-full object-cover" src="{{ novel.cover_image.url }}"/>
-</div>
-<div class="w-3/4 bg-white p-4 rounded-lg">
-<h1 class="text-3xl font-bold mb-2">{{ novel.title }}</h1>
-<p class="text-gray-600 mb-4">Tác giả: {{ novel.author }}</p>
+  <div class="w-1/4 bg-blue-200 rounded-lg overflow-hidden">
+    <img class="w-full object-cover" src="{{ novel.cover_image.url }}" alt="Ảnh bìa {{ novel.title }}">
+  </div>
+  <div class="w-3/4 bg-white p-4 rounded-lg">
+    <h1 class="text-3xl font-bold mb-2">{{ novel.title }}</h1>
+    <p class="text-gray-600 mb-4">Tác giả: {{ novel.author }}</p>
     {% if novel.uploaded_by %}
-      <p class="text-gray-600 mb-4">{% trans "Người đăng:" %}<a class="text-blue-600 hover:underline" href="{% url 'users:profile_detail' username=novel.uploaded_by.username %}">
+      <p class="text-gray-600 mb-4">{% trans "Người đăng:" %}<a href="{% url 'users:profile_detail' username=novel.uploaded_by.username %}" class="text-blue-600 hover:underline">
           {{ novel.uploaded_by.username }}
         </a>
-</p>
+      </p>
     {% endif %}
 
     <div class="mb-4">
-<span class="font-semibold">{% trans "Thể loại:" %}</span>
+      <span class="font-semibold">{% trans "Thể loại:" %}</span>
       {% for genre in novel.genres.all %}
         <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
           {{ genre.name }}
@@ -25,50 +25,51 @@
         <span class="text-gray-500">{% trans "Chưa có thể loại" %}</span>
       {% endfor %}
     </div>
-<div class="mb-4">
-<h3 class="font-bold mb-2">{% trans "Mô tả:" %}</h3>
+    <div class="mb-4">
+      <h3 class="font-bold mb-2">{% trans "Mô tả:" %}</h3>
       {{ novel.description|linebreaks }}
     </div>
-<div class="flex items-center gap-4">
-<div class="bg-green-100 px-3 py-1 rounded-full text-sm">
+    
+    <div class="flex items-center gap-4">
+      <div class="bg-green-100 px-3 py-1 rounded-full text-sm">
         Trạng thái: {{ novel.get_status_display }}
       </div>
-<div class="text-sm text-gray-500">
+      <div class="text-sm text-gray-500">
         Cập nhật lần cuối: {{ novel.updated_at|date:"d/m/Y H:i" }}
       </div>
-</div>
+    </div>
     {% if user.is_authenticated %}
       {% if novel.id in saved_novel_ids %}
-        <a class="inline-flex items-center gap-1 px-2 py-1 mt-2 text-xs text-red-600 border border-red-400 rounded-full hover:bg-red-50 transition-colors" href="{% url 'users:toggle_save_novel' novel.id %}">
-<svg class="h-3 w-3" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-<path clip-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" fill-rule="evenodd"></path>
-</svg>
-<span>{% trans "Đã lưu" %}</span>
-</a>
+        <a href="{% url 'users:toggle_save_novel' novel.id %}" class="inline-flex items-center gap-1 px-2 py-1 mt-2 text-xs text-red-600 border border-red-400 rounded-full hover:bg-red-50 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+          </svg>
+          <span>{% trans "Đã lưu" %}</span>
+        </a>
       {% else %}
-        <a class="inline-flex items-center gap-1 px-2 py-1 mt-2 text-xs text-gray-600 border border-gray-300 rounded-full hover:bg-gray-50 transition-colors" href="{% url 'users:toggle_save_novel' novel.id %}">
-<svg class="h-3 w-3" fill="none" stroke="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-<path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-<span>{% trans "Lưu truyện" %}</span>
-</a>
+        <a href="{% url 'users:toggle_save_novel' novel.id %}" class="inline-flex items-center gap-1 px-2 py-1 mt-2 text-xs text-gray-600 border border-gray-300 rounded-full hover:bg-gray-50 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+          </svg>
+          <span>{% trans "Lưu truyện" %}</span>
+        </a>
       {% endif %}
     {% endif %}
   </div>
 </div>
 <div class="bg-white p-4 rounded-lg">
-<h2 class="text-2xl font-bold mb-4">{% trans "Danh sách chương" %}</h2>
-<div class="divide-y divide-gray-200">
+  <h2 class="text-2xl font-bold mb-4">{% trans "Danh sách chương" %}</h2>
+  <div class="divide-y divide-gray-200">
     {% for chapter in novel.chapters.all %}
       <div class="py-3 px-2 hover:bg-gray-50">
-<a class="flex justify-between items-center" href="{% url 'novels:chapter_detail' novel.id chapter.id %}">
-<span class="ml-2">{{ chapter.title }}</span>
-<span class="text-sm text-gray-500">{{ chapter.created_at|date:"d/m/Y" }}</span>
-</a>
-</div>
+        <a href="{% url 'novels:chapter_detail' novel.id chapter.id %}" class="flex justify-between items-center">
+          <span class="ml-2">{{ chapter.title }}</span>
+          <span class="text-sm text-gray-500">{{ chapter.created_at|date:"d/m/Y" }}</span>
+        </a>
+      </div>
     {% endfor %}
   </div>
 </div>
-<hr class="my-6"/>
+<hr class="my-6">
 {% include 'comments/comment_section.html' %}
 {% endblock %}
