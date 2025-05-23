@@ -1,12 +1,12 @@
-<script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+{% load static %}
 {% load i18n %}
 
-<nav class="bg-gray-100 text-black shadow" x-data="{ open: false, categoryOpen: false, userMenu: false }">
+<nav class="bg-gray-100 text-black shadow" x-data="{ open: false, categoryOpen: false, userMenu: false, languageMenu: false }">
     <div class="container mx-auto px-4 py-3 flex items-center justify-between">
         <!-- Logo -->
         <a href="{% url 'novels:novel_list' %}" class="text-xl font-semibold flex items-center gap-2">
-            <img src="../../static/langhoatu.png" alt="" width="60">
-        <span>{% trans "Lãng Hoa Tử" %}</span>
+            <img src="{% static 'langhoatu.png' %}" alt="" width="60">
+            <span>{% trans "Lãng Hoa Tử" %}</span>
         </a>
 
         <!-- Toggle Button (Mobile) -->
@@ -24,10 +24,12 @@
 
             <!-- Thể loại + Dropdown -->
             <div class="relative" x-data="{ categoryOpen: false }">
-                <button @click="categoryOpen = !categoryOpen" class="flex items-center gap-1 hover:text-blue-600 transition">{% trans "Thể loại" %}<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd"
-                        d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.23 8.29a.75.75 0 01.02-1.06z"
-                        clip-rule="evenodd" />
+                <button @click="categoryOpen = !categoryOpen" class="flex items-center gap-1 hover:text-blue-600 transition">
+                    {% trans "Thể loại" %}
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.23 8.29a.75.75 0 01.02-1.06z"
+                            clip-rule="evenodd" />
                     </svg>
                 </button>
                 <div x-show="categoryOpen" @click.away="categoryOpen = false"
@@ -43,14 +45,51 @@
             <a href="#" class="font-semibold hover:underline">{% trans "Hướng dẫn" %}</a>
         </div>
 
-        <!-- Search + User -->
-<form action="{% url 'novels:search' %}" method="get" class="flex items-center gap-4">
-    <input type="text" name="q" placeholder="Tìm kiếm truyện..."
-           class="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-           minlength="2" required>
-    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700">{% trans "Tìm kiếm" %}</button>
-</form>
+        <!-- Search + Language + User -->
+        <div class="hidden lg:flex items-center gap-4">
+            <!-- Search Form -->
+            <form action="{% url 'novels:search' %}" method="get" class="flex items-center gap-2">
+                <input type="text" name="q" placeholder="{% trans 'Tìm kiếm truyện...' %}"
+                       class="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                       minlength="2" required>
+                <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700">
+                    {% trans "Tìm kiếm" %}
+                </button>
+            </form>
 
+            <!-- Language Switcher -->
+            <div class="relative" x-data="{ languageMenu: false }">
+                <button @click="languageMenu = !languageMenu" class="flex items-center gap-1 px-3 py-2 rounded hover:bg-gray-200 transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+                    </svg>
+                    <span class="text-sm font-medium">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% if LANGUAGE_CODE == 'vi' %}VI
+                        {% elif LANGUAGE_CODE == 'en' %}EN
+                        {% elif LANGUAGE_CODE == 'zh-hans' %}简
+                        {% elif LANGUAGE_CODE == 'zh-hant' %}繁
+                        {% endif %}
+                    </span>
+                </button>
+                
+                <div x-show="languageMenu" @click.away="languageMenu = false"
+                     class="absolute right-0 mt-2 w-40 bg-white rounded shadow-lg z-50 py-2">
+                    {% get_available_languages as languages %}
+                    {% for lang_code, lang_name in languages %}
+                        <form method="post" action="{% url 'set_language' %}" class="inline-block w-full">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                            <input name="language" type="hidden" value="{{ lang_code }}">
+                            <button type="submit" class="w-full text-left px-4 py-2 hover:bg-gray-100 
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% if LANGUAGE_CODE == lang_code %}bg-blue-50 text-blue-600{% endif %}">
+                                {{ lang_name }}
+                            </button>
+                        </form>
+                    {% endfor %}
+                </div>
+            </div>
 
             <!-- Avatar & Dropdown -->
             <div class="relative" x-data="{ userMenu: false }">
@@ -74,7 +113,7 @@
                     {% endif %}
                 </button>
 
-                <!-- Dropdown -->
+                <!-- User Dropdown -->
                 <div x-show="userMenu" @click.away="userMenu = false"
                      class="absolute right-0 mt-2 w-40 bg-white text-gray-800 rounded shadow-lg z-50 text-sm py-2">
                     {% if user.is_authenticated %}
@@ -90,13 +129,15 @@
         </div>
     </div>
 
-    <!-- Mobile Menu (Hidden by default) -->
+    <!-- Mobile Menu -->
     <div x-show="open" class="lg:hidden px-4 py-2 space-y-2 border-t border-gray-200">
         <a href="#" class="block py-2 font-semibold">{% trans "Sáng tác" %}</a>
         
         <!-- Mobile Thể loại Dropdown -->
         <div x-data="{ mobileCategoryOpen: false }">
-            <button @click="mobileCategoryOpen = !mobileCategoryOpen" class="flex justify-between items-center w-full py-2 font-semibold">{% trans "Thể loại" %}<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <button @click="mobileCategoryOpen = !mobileCategoryOpen" class="flex justify-between items-center w-full py-2 font-semibold">
+                {% trans "Thể loại" %}
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path x-show="!mobileCategoryOpen" fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.23 8.29a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
                     <path x-show="mobileCategoryOpen" fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 9.06l-3.71 3.71a.75.75 0 11-1.06-1.06l4.24-4.24a.75.75 0 011.06 0l4.24 4.24a.75.75 0 01-.02 1.06z" clip-rule="evenodd" />
                 </svg>
@@ -111,5 +152,23 @@
         <a href="#" class="block py-2 font-semibold">{% trans "Xuất bản" %}</a>
         <a href="#" class="block py-2 font-semibold">{% trans "Danh sách" %}</a>
         <a href="#" class="block py-2 font-semibold">{% trans "Hướng dẫn" %}</a>
+
+        <!-- Mobile Language Switcher -->
+        <div class="border-t pt-2">
+            <div class="font-semibold mb-2">{% trans "Ngôn ngữ" %}</div>
+            {% get_available_languages as languages %}
+            {% for lang_code, lang_name in languages %}
+                <form method="post" action="{% url 'set_language' %}" class="inline-block">
+                    {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                    <input name="language" type="hidden" value="{{ lang_code }}">
+                    <button type="submit" class="block w-full text-left py-1 px-2 hover:bg-gray-100 rounded
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% if LANGUAGE_CODE == lang_code %}bg-blue-50 text-blue-600{% endif %}">
+                        {{ lang_name }}
+                    </button>
+                </form>
+            {% endfor %}
+        </div>
     </div>
 </nav>
