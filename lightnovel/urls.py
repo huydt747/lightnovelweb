@@ -20,7 +20,7 @@ urlpatterns = [
     # path('comments/', include('comments.urls')),
 
       
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(
     path('', include('novels.urls')),

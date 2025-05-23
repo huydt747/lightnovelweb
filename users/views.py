@@ -4,6 +4,19 @@ from .forms import RegisterForm, LoginForm
 from novels.models import Novel, SavedNovel
 from users.models import User
 from django.contrib.auth.decorators import login_required
+from .forms import AvatarUpdateForm
+
+@login_required
+def update_avatar(request):
+    if request.method == 'POST':
+        form = AvatarUpdateForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile', username=request.user.username)  # OK nếu url đúng
+    else:
+        form = AvatarUpdateForm(instance=request.user)
+    
+    return render(request, 'users/update_avatar.html', {'form': form})
 
 def register_view(request):
     if request.method == 'POST':
@@ -32,17 +45,18 @@ def logout_view(request):
     return redirect('home')
 
 @login_required
-def profile_view(request):
-    # Lấy truyện mà user hiện tại đã upload
-    uploaded_novels = Novel.objects.filter(uploaded_by=request.user)
+def profile_view(request, username):
+    user_profile = get_object_or_404(User, username=username)
+    uploaded_novels = Novel.objects.filter(uploaded_by=user_profile)
     uploaded_count = uploaded_novels.count()
-    
+
     context = {
-        'user': request.user,
+        'user': user_profile,
         'uploaded_novels': uploaded_novels,
         'uploaded_count': uploaded_count,
     }
     return render(request, 'users/profile.html', context)
+
 
 @login_required
 def toggle_save_novel(request, novel_id):
