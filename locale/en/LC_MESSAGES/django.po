@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-23 10:15+0700\n"
+"POT-Creation-Date: 2025-05-23 20:54+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -116,20 +116,28 @@ msgid "Gửi bình luận"
 msgstr "Send comment"
 
 #: .\templates\comments\comment_section.html:39
-msgid "Vui lòng"
+#, fuzzy
+#| msgid "Vui lòng"
+msgid "Vui lòng "
 msgstr "Please"
 
 #: .\templates\comments\comment_section.html:39
-msgid "đăng nhập"
-msgstr "Login"
+#, fuzzy
+#| msgid "đăng nhập"
+msgid "đăng nhập "
+msgstr "login"
 
 #: .\templates\comments\comment_section.html:39
-msgid "hoặc"
+#, fuzzy
+#| msgid "hoặc"
+msgid "hoặc "
 msgstr "or"
 
 #: .\templates\comments\comment_section.html:39
-msgid "đăng ký"
-msgstr "Register"
+#, fuzzy
+#| msgid "đăng ký"
+msgid "đăng ký "
+msgstr "register"
 
 #: .\templates\comments\comment_section.html:39
 msgid "để bình luận"
@@ -163,15 +171,20 @@ msgstr "No comment yet"
 msgid "Hãy là người đầu tiên bình luận!"
 msgstr "Be the first one to comment!"
 
+#: .\templates\index.html:8 .\templates\partials\footer.html:4
+#: .\templates\partials\header.html:9
+msgid "Lãng Hoa Tử"
+msgstr "Death of the Handsome Flower"
+
 #: .\templates\novels\chapter_detail.html:37
 #: .\templates\novels\chapter_detail.html:39
 msgid "&larr;"
-msgstr ""
+msgstr "&larr;"
 
 #: .\templates\novels\chapter_detail.html:53
 #: .\templates\novels\chapter_detail.html:55
 msgid "&rarr;"
-msgstr ""
+msgstr "&rarr;"
 
 #: .\templates\novels\genre_filter.html:48
 msgid "Đọc ngay"
@@ -187,91 +200,95 @@ msgstr "Previous"
 msgid "Sau"
 msgstr "After"
 
-#: .\templates\novels\guidelines.html:5
+#: .\templates\novels\guidelines.html:6
 msgid "Hướng Dẫn Đăng Truyện"
 msgstr "Publish Guidelines"
 
-#: .\templates\novels\guidelines.html:7
+#: .\templates\novels\guidelines.html:8
 msgid ""
 "Chào mừng bạn đến với nền tảng chia sẻ truyện! Vui lòng làm theo các bước "
 "sau để đăng truyện của bạn:"
-msgstr "Welcome to the websit! Please follow these steps "
-"to publish your story:"
+msgstr ""
+"Welcome to the website! Please follow these steps to publish your novel:"
 
-#: .\templates\novels\guidelines.html:10
+#: .\templates\novels\guidelines.html:11
 msgid "Bước 1: Đăng nhập tài khoản"
 msgstr "Step 1: Login"
 
-#: .\templates\novels\guidelines.html:12
-msgid "Truy cập trang"
+#: .\templates\novels\guidelines.html:13
+#, fuzzy
+#| msgid "Truy cập trang"
+msgid "Truy cập trang "
 msgstr "Access the page."
 
-#: .\templates\novels\guidelines.html:12 .\templates\partials\header.html:85
+#: .\templates\novels\guidelines.html:13 .\templates\partials\header.html:103
 msgid "Đăng nhập"
 msgstr "Login"
 
-#: .\templates\novels\guidelines.html:13
-msgid "Nếu chưa có tài khoản, bạn có thể"
-msgstr "If you haven't login, you can"
+#: .\templates\novels\guidelines.html:14
+#, fuzzy
+#| msgid "Nếu chưa có tài khoản, bạn có thể"
+msgid "Nếu chưa có tài khoản, bạn có thể "
+msgstr "If you haven't login yet, you can "
 
-#: .\templates\novels\guidelines.html:13
+#: .\templates\novels\guidelines.html:14
 msgid "đăng ký tại đây"
 msgstr "register here"
 
-#: .\templates\novels\guidelines.html:18
+#: .\templates\novels\guidelines.html:19
 msgid "Bước 2: Truy cập mục \\"
 msgstr "Access \\"
 
-#: .\templates\novels\guidelines.html:20
-msgid "\\"
-msgstr ""
-
 #: .\templates\novels\guidelines.html:21
+msgid "\\"
+msgstr "\\"
+
+#: .\templates\novels\guidelines.html:22
 msgid "Chọn \\"
 msgstr "Choose \\"
 
-#: .\templates\novels\guidelines.html:26
+#: .\templates\novels\guidelines.html:27
 msgid "Bước 3: Nhập thông tin truyện"
-msgstr "Step 3: Input the story information."
+msgstr "Step 3: Enter the novel information."
 
-#: .\templates\novels\guidelines.html:28 .\templates\uploads\edit_novel.html:35
+#: .\templates\novels\guidelines.html:29 .\templates\uploads\edit_novel.html:35
 msgid "Tiêu đề truyện"
 msgstr "Title"
 
-#: .\templates\novels\guidelines.html:29 .\templates\uploads\edit_novel.html:46
+#: .\templates\novels\guidelines.html:30 .\templates\uploads\edit_novel.html:46
 #: .\templates\uploads\upload_novel.html:48
 msgid "Tác giả"
 msgstr "Author"
 
-#: .\templates\novels\guidelines.html:30
+#: .\templates\novels\guidelines.html:31
 msgid "Thể loại (có thể chọn nhiều)"
 msgstr "Genre"
 
-#: .\templates\novels\guidelines.html:31
+#: .\templates\novels\guidelines.html:32
 msgid "Ảnh bìa (nếu có)"
 msgstr "Cover image"
 
-#: .\templates\novels\guidelines.html:32
+#: .\templates\novels\guidelines.html:33
 msgid "Tóm tắt nội dung"
 msgstr "Summary"
 
-#: .\templates\novels\guidelines.html:37
+#: .\templates\novels\guidelines.html:38
 msgid "Bước 4: Đăng chương truyện"
 msgstr "Step 4: Publish the chapters"
 
-#: .\templates\novels\guidelines.html:39
-msgid "Vào phần \\"
-msgstr "Access \\"
-
 #: .\templates\novels\guidelines.html:40
+msgid "Vào phần \\"
+msgstr "Access to \\"
+
+#: .\templates\novels\guidelines.html:41
 msgid "Thêm chương mới, điền tiêu đề và nội dung chương"
 msgstr "Publish new chapter, enter the title and content"
 
-#: .\templates\novels\guidelines.html:45
+#: .\templates\novels\guidelines.html:46
 msgid "Lưu ý:"
 msgstr "Note:"
 
-#: .\templates\novels\guidelines.html:45
+#: .\templates\novels\guidelines.html:46
 msgid "Truyện sẽ được kiểm duyệt trước khi hiển thị công khai."
 msgstr "The story will be checked before being published to the site."
 
@@ -297,7 +314,7 @@ msgstr "Saved"
 
 #: .\templates\novels\novel_detail.html:54
 msgid "Lưu truyện"
-msgstr "Story saved"
+msgstr "Novel saved"
 
 #: .\templates\novels\novel_detail.html:61
 msgid "Danh sách chương"
@@ -334,11 +351,11 @@ msgstr ""
 #: .\templates\novels\novel_list.html:178
 #: .\templates\novels\novel_list.html:238
 msgid "Dữ liệu truyện không hợp lệ"
-msgstr "Not valid"
+msgstr "Novel data is not valid"
 
 #: .\templates\novels\novel_list.html:69
 msgid "🚫 Chưa có truyện nào được cập nhật."
-msgstr "No story updated."
+msgstr "🚫 No story updated."
 
 #: .\templates\novels\novel_list.html:192
 msgid "Thể Loại Siêu Nhiên"
@@ -374,18 +391,14 @@ msgstr "Discover stories that are published in Viet Nam!"
 
 #: .\templates\novels\search_results.html:22
 msgid "Không tìm thấy truyện nào."
-msgstr "No can do, mate."
-
-#: .\templates\partials\footer.html:4 .\templates\partials\header.html:9
-msgid "Lãng Hoa Tử"
-msgstr "Death of a Handsome Flower"
+msgstr "Can't find the result."
 
 #: .\templates\partials\footer.html:4
 msgid ". All rights reserved."
 msgstr ""
 
 #: .\templates\partials\footer.html:7 .\templates\partials\header.html:23
-#: .\templates\partials\header.html:95
+#: .\templates\partials\header.html:113
 msgid "Sáng tác"
 msgstr "Self-published"
 
@@ -407,49 +420,55 @@ msgstr "Novel List"
 
 #: .\templates\partials\footer.html:12
 msgid "Truy cập F88"
-msgstr "Acces F88"
+msgstr "Access F88"
 
-#: .\templates\partials\header.html:27 .\templates\partials\header.html:99
+#: .\templates\partials\header.html:28 .\templates\partials\header.html:118
 #: .\templates\uploads\edit_novel.html:67
 #: .\templates\uploads\upload_novel.html:103
 msgid "Thể loại"
 msgstr "Category"
 
-#: .\templates\partials\header.html:41 .\templates\partials\header.html:111
+#: .\templates\partials\header.html:43 .\templates\partials\header.html:131
 msgid "Xuất bản"
 msgstr "Published"
 
-#: .\templates\partials\header.html:42 .\templates\partials\header.html:112
+#: .\templates\partials\header.html:44 .\templates\partials\header.html:132
 msgid "Danh sách"
 msgstr "List"
 
-#: .\templates\partials\header.html:43 .\templates\partials\header.html:113
+#: .\templates\partials\header.html:45 .\templates\partials\header.html:133
 msgid "Hướng dẫn"
 msgstr "Guidelines"
 
-#: .\templates\partials\header.html:51
+#: .\templates\partials\header.html:52
+#, fuzzy
+#| msgid "Tìm kiếm"
+msgid "Tìm kiếm truyện..."
+msgstr "Search novel..."
+
+#: .\templates\partials\header.html:56
 msgid "Tìm kiếm"
 msgstr "Search"
 
-#: .\templates\partials\header.html:81
+#: .\templates\partials\header.html:97
 msgid "Hồ sơ"
 msgstr "Profile"
 
-#: .\templates\partials\header.html:82
+#: .\templates\partials\header.html:100
 msgid "Đăng truyện"
 msgstr "Upload"
 
-#: .\templates\partials\header.html:83
+#: .\templates\partials\header.html:101
 msgid "Đăng xuất"
 msgstr "Log out"
 
-#: .\templates\partials\header.html:86
+#: .\templates\partials\header.html:104
 msgid "Đăng ký"
 msgstr "Register"
 
 #: .\templates\uploads\edit_chapter.html:23
 msgid "Quay lại danh sách chương"
-msgstr "Comeback to chapter list."
+msgstr "Back to chapter list."
 
 #: .\templates\uploads\edit_chapter.html:34
 msgid "Chỉnh sửa chương"
@@ -514,7 +533,7 @@ msgstr "My novels"
 #: .\templates\uploads\my_uploads.html:9
 #: .\templates\uploads\my_uploads.html:100
 msgid "Tạo truyện mới"
-msgstr "Create new novel"
+msgstr "Upload new novel"
 
 #: .\templates\uploads\my_uploads.html:19
 msgid "Truyện"
@@ -526,7 +545,7 @@ msgstr "Chapter"
 
 #: .\templates\uploads\my_uploads.html:21
 msgid "Đăng ngày"
-msgstr "Date"
+msgstr "Date upload"
 
 #: .\templates\uploads\my_uploads.html:22
 msgid "Thao tác"
@@ -558,7 +577,7 @@ msgstr ""
 
 #: .\templates\uploads\upload_chapter.html:103
 msgid "Các chương đã thêm"
-msgstr "Updated chapters."
+msgstr "Uploaded chapters."
 
 #: .\templates\uploads\upload_chapter.html:121
 msgid "Chưa có chương nào"
@@ -574,11 +593,11 @@ msgstr "Save and complete"
 
 #: .\templates\uploads\upload_novel.html:7
 msgid "Tải lên truyện mới"
-msgstr "Upload a new story"
+msgstr "Upload new novel"
 
 #: .\templates\uploads\upload_novel.html:8
 msgid "Chia sẻ tác phẩm của bạn với hàng ngàn độc giả"
-msgstr "Share your work with thousands of readers."
+msgstr "Share your works with thousands of readers."
 
 #: .\templates\uploads\upload_novel.html:33
 msgid "Tiêu đề"
@@ -622,11 +641,11 @@ msgstr "Introduce"
 
 #: .\templates\users\profile.html:64
 msgid "Chưa có thông tin giới thiệu..."
-msgstr "No introduce information"
+msgstr "No introduce information..."
 
 #: .\templates\users\profile.html:80 .\templates\users\profile.html:139
 msgid "Truyện đã đăng"
-msgstr "Uploaded stories"
+msgstr "Uploaded novels"
 
 #: .\templates\users\profile.html:120 .\templates\users\saved.html:6
 msgid "Truyện đã lưu"
@@ -642,11 +661,11 @@ msgstr "Upload new novel"
 
 #: .\templates\users\profile.html:217
 msgid "Xem truyện"
-msgstr "Checkout the novel"
+msgstr "Read now"
 
 #: .\templates\users\profile.html:255
 msgid "Đăng truyện đầu tiên"
-msgstr "Publish your first story"
+msgstr "Publish your first novel"
 
 #: .\templates\users\saved.html:47
 msgid "Bạn chưa lưu truyện nào"
@@ -662,19 +681,19 @@ msgstr "Explore new novels"
 
 #: .\uploads\views.py:43
 msgid "Truyện đã được tạo thành công!"
-msgstr "Story was created successifully!"
+msgstr "Novel was created successifully!"
 
 #: .\uploads\views.py:56
 msgid "Bạn không có quyền thêm chương cho truyện này."
-msgstr "You have no right to add new chapters for this story."
+msgstr "You have no right to add new chapters for this novel."
 
 #: .\uploads\views.py:74
 msgid "Chương mới đã được tạo thành công!"
-msgstr "New chapter created successifully!"
+msgstr "New chapter created successfully!"
 
 #: .\uploads\views.py:105
 msgid "Bạn không có quyền chỉnh sửa truyện này."
-msgstr "You have no right to edit this story."
+msgstr "You have no right to edit this novel."
 
 #: .\uploads\views.py:128
 msgid "Thông tin truyện đã được cập nhật!"
