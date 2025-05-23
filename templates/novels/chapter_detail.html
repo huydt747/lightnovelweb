@@ -26,33 +26,33 @@
   }
 </style>
 <div class="max-w-3xl mx-auto p-6">
-  <a href="{% url 'novels:novel_detail' novel.id %}" class="text-blue-500 hover:underline mb-4 block">&larr; Quay lại {{ novel.title }}</a>
-  <h1 class="text-3xl font-bold mb-2">Chương {{ chapter.chapter_number }}: {{ chapter.title }}</h1>
-  <p class="text-sm text-gray-500 mb-4">Cập nhật: {{ chapter.created_at|date:"d/m/Y H:i" }}</p>
-  <div class="prose max-w-full">
+<a class="text-blue-500 hover:underline mb-4 block" href="{% url 'novels:novel_detail' novel.id %}">← Quay lại {{ novel.title }}</a>
+<h1 class="text-3xl font-bold mb-2">Chương {{ chapter.chapter_number }}: {{ chapter.title }}</h1>
+<p class="text-sm text-gray-500 mb-4">Cập nhật: {{ chapter.created_at|date:"d/m/Y H:i" }}</p>
+<div class="prose max-w-full">
     {{ chapter.content|linebreaks }}
   </div>
-  <div id="chapter-nav" class="sticky-nav">
+<div class="sticky-nav" id="chapter-nav">
     {% if prev_chapter %}
-      <a href="{% url 'novels:chapter_detail' novel.id prev_chapter.id %}" class="nav-item bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">&larr;</a>
+      <a class="nav-item bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" href="{% url 'novels:chapter_detail' novel.id prev_chapter.id %}">{% trans "←" %}</a>
     {% else %}
-      <button class="nav-item bg-gray-300 text-white px-4 py-2 rounded" disabled>&larr;</button>
+      <button class="nav-item bg-gray-300 text-white px-4 py-2 rounded" disabled="">{% trans "←" %}</button>
     {% endif %}
     
     <form method="get" onchange="if(this.value) window.location.href=this.value;">
-      <select class="border border-gray-300 rounded-full px-3 py-2" name="chapter">
+<select class="border border-gray-300 rounded-full px-3 py-2" name="chapter">
         {% for ch in novel.chapters.all %}
-          <option value="{% url 'novels:chapter_detail' novel.id ch.id %}" {% if ch.id == chapter.id %}selected{% endif %}>
+          <option %}="" %}selected{%="" ch.id="chapter.id" endif="" if="" value="{% url 'novels:chapter_detail' novel.id ch.id %}" {%="">
             Chương {{ ch.chapter_number }}: {{ ch.title|truncatechars:40 }}
           </option>
         {% endfor %}
       </select>
-    </form>
+</form>
     
     {% if next_chapter %}
-      <a href="{% url 'novels:chapter_detail' novel.id next_chapter.id %}" class="nav-item bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">&rarr;</a>
+      <a class="nav-item bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" href="{% url 'novels:chapter_detail' novel.id next_chapter.id %}">{% trans "→" %}</a>
     {% else %}
-      <button class="nav-item bg-gray-300 text-white px-4 py-2 rounded" disabled>&rarr;</button>
+      <button class="nav-item bg-gray-300 text-white px-4 py-2 rounded" disabled="">{% trans "→" %}</button>
     {% endif %}
   </div>
   {% include 'comments/comment_section.html' %}

@@ -4,9 +4,9 @@
 {% block content %}
 <div class="max-w-md mx-auto mt-16 p-8 bg-white rounded-lg shadow-lg border border-gray-200">
   <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">
-    {% if type == 'register' %}{% trans "Đăng ký" %}{% else %}{% trans "Đăng nhập" %}{% endif %}
+    {% if type == 'register' %}Đăng ký{% else %}Đăng nhập{% endif %}
   </h2>
-     
+  
   <form method="post" class="space-y-6">
     {% csrf_token %}
     {% if form.non_field_errors %}
@@ -28,11 +28,11 @@
         {% endif %}
       </div>
     {% endfor %}
-         
+    
     <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md transition-colors duration-300">
-      {% if type == 'register' %}{% trans "Tạo tài khoản" %}{% else %}{% trans "Đăng nhập" %}{% endif %}
+      {% if type == 'register' %}Tạo tài khoản{% else %}Đăng nhập{% endif %}
     </button>
   </form>
-
+  
 </div>
 {% endblock %}

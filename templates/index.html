@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+{% trans "html" %}
 <html lang="vi">
 <head>
     {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Lãng Hoa Tử{% endblock %}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>{% block title %}Lãng Hoa Tử{% endblock %}</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="{% static 'css/styles.css' %}" rel="stylesheet"/>
 </head>
 <body class="bg-gray-100 text-gray-800">
     {% include "partials/header.html" %}
