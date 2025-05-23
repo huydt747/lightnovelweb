@@ -9,5 +9,7 @@ urlpatterns = [
     path('<int:novel_id>/chapter/<int:chapter_id>/', views.chapter_detail, name='chapter_detail'),
     path('genre/<int:genre_id>/', views.genre_filter, name='genre_filter'),
     path('original/', views.original_novels, name='original'),
+    path('published/', views.published_novels, name='published'),
     path('search/', views.search_novels, name='search'),
+    path('guidelines/', views.guidelines, name='guidelines'),
 ]

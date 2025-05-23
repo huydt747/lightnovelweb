@@ -8,11 +8,14 @@ from novels import views as novel_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
     path('', novel_views.novel_list, name='home'),
     path('novels/', include('novels.urls')),
     path('users/', include(('users.urls', 'users'), namespace='users')),
     path('uploads/', include('uploads.urls')),
     path('original/', novel_views.original_novels, name='original'),
+    path('published/', novel_views.published_novels, name='published'),
+    path('guidelines/', novel_views.guidelines, name='guidelines'),
     # path('comments/', include('comments.urls')),
 ]
 
