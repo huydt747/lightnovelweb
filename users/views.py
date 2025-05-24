@@ -12,7 +12,7 @@ def update_avatar(request):
         form = AvatarUpdateForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('profile', username=request.user.username)  # OK nếu url đúng
+            return redirect('profile', username=request.user.username)
     else:
         form = AvatarUpdateForm(instance=request.user)
     
