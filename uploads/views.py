@@ -12,30 +12,25 @@ def upload_novel(request):
     if request.method == 'POST':
         form = NovelUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            # Lưu upload
             novel_upload = form.save(commit=False)
             novel_upload.user = request.user
-            novel_upload.uploaded_by = request.user  # Cũng set uploaded_by
+            novel_upload.uploaded_by = request.user
             novel_upload.save()
             
-            # Lưu many-to-many relationships nếu có
             form.save_m2m()
             
-            # Tạo novel từ upload
             novel = Novel.objects.create(
                 title=novel_upload.title,
                 description=novel_upload.description,
                 author=novel_upload.author,
                 cover_image=novel_upload.cover_image,
                 status='ongoing',
-                uploaded_by=request.user  # Thêm uploaded_by cho Novel
+                uploaded_by=request.user
             )
             
-            # Liên kết novel với upload
             novel_upload.novel = novel
             novel_upload.save()
             
-            # Thêm thể loại cho novel
             genres = form.cleaned_data.get('genres', [])
             for genre in genres:
                 novel.genres.add(genre)
@@ -51,7 +46,6 @@ def upload_novel(request):
 def upload_chapter(request, novel_upload_id):
     novel_upload = get_object_or_404(NovelUpload, id=novel_upload_id)
     
-    # Kiểm tra quyền truy cập
     if novel_upload.user != request.user:
         return HttpResponseForbidden(_("Bạn không có quyền thêm chương cho truyện này."))
     
@@ -62,7 +56,6 @@ def upload_chapter(request, novel_upload_id):
             chapter_upload.novel_upload = novel_upload
             chapter_upload.save()
             
-            # Tạo chapter trong novels app
             if novel_upload.novel:
                 Chapter.objects.create(
                     novel=novel_upload.novel,
@@ -73,13 +66,11 @@ def upload_chapter(request, novel_upload_id):
             
             messages.success(request, _('Chương mới đã được tạo thành công!'))
             
-            # Xác định hành động tiếp theo
             if 'save_and_add' in request.POST:
                 return redirect('upload_chapter', novel_upload_id=novel_upload.id)
             else:
                 return redirect('novels:novel_detail', novel_id=novel_upload.novel.id)
     else:
-        # Tự động điền số chương tiếp theo
         next_chapter = novel_upload.chapters.count() + 1
         form = ChapterUploadForm(initial={'chapter_number': next_chapter})
     
@@ -100,7 +91,6 @@ def my_uploads(request):
 def edit_novel_upload(request, novel_upload_id):
     novel_upload = get_object_or_404(NovelUpload, id=novel_upload_id)
     
-    # Kiểm tra quyền truy cập
     if novel_upload.user != request.user:
         return HttpResponseForbidden(_("Bạn không có quyền chỉnh sửa truyện này."))
     

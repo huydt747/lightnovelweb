@@ -235,16 +235,16 @@
             </svg>
             <h3 class="mt-4 text-lg font-medium text-gray-900">
               {% if request.user == user %}
-                Chưa có truyện nào
+               {% trans "Chưa có truyện nào" %}
               {% else %}
-                {{ user.username }} chưa đăng truyện nào
+                {{ user.username }} {% trans "chưa đăng truyện nào" %}
               {% endif %}
             </h3>
             <p class="mt-2 text-gray-500">
               {% if request.user == user %}
-                Bạn chưa đăng truyện nào. Hãy bắt đầu chia sẻ những câu chuyện tuyệt vời của bạn!
+                {% trans "Bạn chưa đăng truyện nào. Hãy bắt đầu chia sẻ những câu chuyện tuyệt vời của bạn!" %}          
               {% else %}
-                Người dùng này chưa chia sẻ truyện nào.
+                {% trans "Người dùng này chưa chia sẻ truyện nào." %}
               {% endif %}
             </p>
             {% if request.user == user %}

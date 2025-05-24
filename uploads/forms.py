@@ -24,7 +24,6 @@ class NovelUploadForm(forms.ModelForm):
         if commit:
             novel_upload.save()
             
-            # Lưu genres
             genres = self.cleaned_data.get('genres', [])
             for genre in genres:
                 GenreSelection.objects.create(

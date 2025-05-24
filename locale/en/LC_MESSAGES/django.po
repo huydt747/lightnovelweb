@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-23 20:54+0700\n"
+"POT-Creation-Date: 2025-05-24 07:47+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -357,6 +357,29 @@ msgstr "Novel data is not valid"
 msgid "🚫 Chưa có truyện nào được cập nhật."
 msgstr "🚫 No story updated."
 
+#: .\templates\novels\novel_list.html:78 .\templates\novels\novel_list.html:135
+#, fuzzy
+#| msgid "Thể loại"
+msgid "Thể Loại"
+msgstr "Category"
+
+#: .\templates\novels\novel_list.html:79
+#, fuzzy
+#| msgid "Khám phá những câu chuyện đã được xuất bản tại Việt Nam!"
+msgid "Khám phá những câu chuyện đầy hấp dẫn thuộc thể loại"
+msgstr "Discover stories that are published in Viet Nam!"
+
+#: .\templates\novels\novel_list.html:114
+#: .\templates\uploads\my_uploads.html:20
+msgid "Chương"
+msgstr "Chapter"
+
+#: .\templates\novels\novel_list.html:136
+#, fuzzy
+#| msgid "Khám phá những câu chuyện huyền bí và đầy lôi cuốn!"
+msgid "Khám phá những câu chuyện kịch tính và đầy năng lượng thuộc thể loại"
+msgstr "Discover mysterious and exciting adventures."
+
 #: .\templates\novels\novel_list.html:192
 msgid "Thể Loại Siêu Nhiên"
 msgstr "Supernatural"
@@ -539,10 +562,6 @@ msgstr "Upload new novel"
 msgid "Truyện"
 msgstr "Novel"
 
-#: .\templates\uploads\my_uploads.html:20
-msgid "Chương"
-msgstr "Chapter"
-
 #: .\templates\uploads\my_uploads.html:21
 msgid "Đăng ngày"
 msgstr "Date upload"
@@ -559,7 +578,7 @@ msgstr "Add chapter"
 msgid "Chỉnh sửa"
 msgstr "Edit"
 
-#: .\templates\uploads\my_uploads.html:95
+#: .\templates\uploads\my_uploads.html:95 .\templates\users\profile.html:238
 msgid "Chưa có truyện nào"
 msgstr "No novel"
 
@@ -663,6 +682,22 @@ msgstr "Upload new novel"
 msgid "Xem truyện"
 msgstr "Read now"
 
+#: .\templates\users\profile.html:240
+#, fuzzy
+#| msgid "Chưa có truyện nào"
+msgid "chưa đăng truyện nào"
+msgstr "No novel"
+
+#: .\templates\users\profile.html:245
+msgid ""
+"Bạn chưa đăng truyện nào. Hãy bắt đầu chia sẻ những câu chuyện tuyệt vời của "
+"bạn!"
+msgstr "You haven't uploaded anything yet."
+
+#: .\templates\users\profile.html:247
+msgid "Người dùng này chưa chia sẻ truyện nào."
+msgstr "This user hasn't uploaded anything yet."
+
 #: .\templates\users\profile.html:255
 msgid "Đăng truyện đầu tiên"
 msgstr "Publish your first novel"
@@ -679,30 +714,30 @@ msgstr "Let's save your favs to read later!"
 msgid "Khám phá truyện mới"
 msgstr "Explore new novels"
 
-#: .\uploads\views.py:43
+#: .\uploads\views.py:38
 msgid "Truyện đã được tạo thành công!"
 msgstr "Novel was created successifully!"
 
-#: .\uploads\views.py:56
+#: .\uploads\views.py:50
 msgid "Bạn không có quyền thêm chương cho truyện này."
 msgstr "You have no right to add new chapters for this novel."
 
-#: .\uploads\views.py:74
+#: .\uploads\views.py:67
 msgid "Chương mới đã được tạo thành công!"
 msgstr "New chapter created successfully!"
 
-#: .\uploads\views.py:105
+#: .\uploads\views.py:95
 msgid "Bạn không có quyền chỉnh sửa truyện này."
 msgstr "You have no right to edit this novel."
 
-#: .\uploads\views.py:128
+#: .\uploads\views.py:118
 msgid "Thông tin truyện đã được cập nhật!"
 msgstr "Novel's information has been updated"
 
-#: .\uploads\views.py:147
+#: .\uploads\views.py:137
 msgid "Bạn không có quyền chỉnh sửa chương này."
 msgstr "You have no right to edit this chapter."
 
-#: .\uploads\views.py:173
+#: .\uploads\views.py:163
 msgid "Chương đã được cập nhật!"
 msgstr "Chapter has been updated!"

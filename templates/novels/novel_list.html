@@ -75,8 +75,8 @@
 <section class="mb-16">
     <div class="relative bg-gradient-to-r from-green-600 to-teal-600 rounded-2xl p-8 mb-8 shadow-xl text-center text-white overflow-hidden">
         <div class="absolute inset-0 bg-[url('/static/images/genre1-bg.jpg')] bg-cover bg-center opacity-20"></div>
-        <h2 class="relative text-3xl md:text-4xl font-extrabold tracking-tight">Thể Loại {{ genre_one.name }}</h2>
-        <p class="relative mt-2 text-lg text-white/80">Khám phá những câu chuyện đầy hấp dẫn thuộc thể loại {{ genre_one.name }}!</p>
+        <h2 class="relative text-3xl md:text-4xl font-extrabold tracking-tight">{% trans "Thể Loại" %} {{ genre_one.name }}</h2>
+        <p class="relative mt-2 text-lg text-white/80">{% trans "Khám phá những câu chuyện đầy hấp dẫn thuộc thể loại" %} {{ genre_one.name }}!</p>
     </div>
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
         {% for novel in one_novels %}
@@ -111,7 +111,7 @@
                                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.5v11m-6-5.5h12"></path>
                                     </svg>
-                                    Chương {{ novel.latest_chapter.chapter_number }}
+                                    {% trans "Chương" %} {{ novel.latest_chapter.chapter_number }}
                                 </a>
                             </div>
                         {% endif %}
@@ -132,8 +132,8 @@
 <section class="mb-16">
     <div class="relative bg-gradient-to-r from-red-600 to-pink-600 rounded-2xl p-8 mb-8 shadow-xl text-center text-white overflow-hidden">
         <div class="absolute inset-0 bg-[url('/static/images/action-bg.jpg')] bg-cover bg-center opacity-20"></div>
-        <h2 class="relative text-3xl md:text-4xl font-extrabold tracking-tight">Thể Loại {{ genre_action.name }}</h2>
-        <p class="relative mt-2 text-lg text-white/80">Khám phá những câu chuyện kịch tính và đầy năng lượng thuộc thể loại {{ genre_action.name }}!</p>
+        <h2 class="relative text-3xl md:text-4xl font-extrabold tracking-tight">{% trans "Thể Loại" %} {{ genre_action.name }}</h2>
+        <p class="relative mt-2 text-lg text-white/80">{% trans "Khám phá những câu chuyện kịch tính và đầy năng lượng thuộc thể loại" %}  {{ genre_action.name }}!</p>
     </div>
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
         {% for novel in action_novels %}
