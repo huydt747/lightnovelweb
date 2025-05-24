@@ -55,13 +55,15 @@
       <button class="nav-item bg-gray-300 text-white px-4 py-2 rounded" disabled>{% trans "&rarr;" %}</button>
     {% endif %}
   </div>
-  {% include 'comments/comment_section.html' %}
 </div>
 <script>
   let lastScrollY = window.scrollY;
   const nav = document.getElementById('chapter-nav');
+
   window.addEventListener('scroll', () => {
-    nav.classList.toggle('hidden', window.scrollY >{% trans "lastScrollY);
+    nav.classList.toggle('hidden', window.scrollY > lastScrollY);
     lastScrollY = window.scrollY;
-  });" %}</script>
+  });
+</script>
+
 {% endblock %}
